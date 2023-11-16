@@ -1,0 +1,20 @@
+{% extends 'pharmacypages/manageMedicine/base.html' %}
+
+{% block content %}
+  <div class="deleteMedicineForm">
+    <h2>Delete Medicine</h2>
+    <p>Are you sure you want to delete the following medicine?</p>
+    <ul>
+      <li><strong>Medicine Name:</strong> {{ medicine.medicine_name }}</li>
+      <li><strong>Description:</strong> {{ medicine.description }}</li>
+      <li><strong>Unit Volume:</strong> {{ medicine.unitVolume }}</li>
+      <li><strong>Price Per Unit Volume:</strong> {{ medicine.pricePerUnitVolume }}</li>
+      <li><strong>Count:</strong> {{ medicine.count }}</li>
+    </ul>
+    <form method="post" action="{% url 'delete_medicine' medicine.id %}">
+      {% csrf_token %}
+      <button type="submit">Delete</button>
+      <a href=""><button type="button">Cancel</button></a>
+    </form>
+  </div>
+{% endblock %}

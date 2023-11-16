@@ -1,0 +1,51 @@
+   {% extends 'pharmacypages/manageSuppliers/manageSuppliers.html' %}
+
+<div class="registeredMedicine">
+ {% block content %}
+  <div class="addedMedicine">
+   {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <h2>Registered Suppliers:</h2>
+    <table class="table table-bordered table-hover" id="RegisteredMedicineTable">
+      <thead>
+        <tr>
+              <th>Legal Name</th>
+              <th>Trade Name</th>
+              <th>GST Reg No</th>
+              <th>Contact Phone</th>
+              <th>Contact Email</th>
+              <th>Contract Start Date</th>
+              <th>Contract End Date</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for supplier in all_suppliers %}
+              <tr>
+                <td>{{ supplier.supplier_legalName }}</td>
+                <td>{{ supplier.supplier_TradeName }}</td>
+                <td>{{ supplier.supplier_GSTReGNo }}</td>
+                <td>{{ supplier.contact_PhoneNumber }}</td>
+                <td>{{ supplier.contact_email }}</td>
+                <td>{{ supplier.contract_startDate }}</td>
+                <td>{{ supplier.contract_EndDate }}</td>
+                <td>{{ supplier.get_status_display }}</td>
+                <td>
+                  <a href="">Edit</a>
+                  <a href="">Delete</a>
+                </td>
+              </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
+</div>
+
+

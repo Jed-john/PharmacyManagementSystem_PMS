@@ -1,0 +1,257 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pharmacist</title>
+
+    <link rel="stylesheet" href="{% static 'css/accountsStyles/pharmacist_homestyles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pharmacyStyles/manageSuppliersStyles.css' %}">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<body>
+<div class="main_content">
+
+    <div class="menu">
+    <div class="sidebar">
+        <div class="profile">
+                <img src="https://images.pexels.com/photos/3938022/pexels-photo-3938022.jpeg?auto=compress&cs=tinysrgb&w=600" alt="profile_picture">
+                <h4>{{ user.get_username }}</h4>
+                <p>Pharmacist</p>
+            </div>
+
+        <ul>
+
+                <li>
+                    <a href="{% url 'dashboard' %}" class="active">
+                        <span class="icon"><i class="fas fa-desktop" id="dashboard"></i></span>
+                        <span class="item">My Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'manageMedicine' %}">
+                        <span class="icon"><i class="fas fa-user-friends" id="medicine"></i></span>
+                        <span class="item">Manage Medicine</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-tachometer-alt" id="clients"></i></span>
+                        <span class="item">Manage Clients</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-database" id="sales"></i></span>
+                        <span class="item">Manage Sales</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'manageSuppliers' %}">
+                        <span class="icon"><i class="fas fa-user-shield" id="suppliers"></i></span>
+                        <span class="item">Manage Suppliers</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-chart-line" id="reports"></i></span>
+                        <span class="item">Reports</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-cog" id="settings"></i></span>
+                        <span class="item">Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <div class="top_navbar ">
+
+                <!-- menu bars to hide and show menu
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
+                -->
+
+            <h4>{% block header_title %}Manage Suppliers{% endblock %}</h4>
+                <h4>Date Today: {% now "N j, Y" %}. </h4>
+                <div class="bar_icons">
+                <span class="glyphicon glyphicon-search"><a href=""></a></span>
+                 <a href=""><span class="glyphicon glyphicon-bell"><a href=""></a></span></a>
+                <a href="">  <i class="fa fa-user-circle" aria-hidden="true"></i></a>
+                    </div>
+            </div>
+         </div>
+
+    </div>
+
+<div class="suppliersSection">
+    <div class="manageSuppliers">
+        <h1>Manage Suppliers</h1>
+        <div class="suppliersBtn">
+            <a href="{% url 'add_supplier' %}"><button id="new"> New </button><span>|</span></a>
+
+            <a href=""><button id="update"> Update </button><span>|</span></a>
+
+            <a href=""><button id="delete"> Delete</button><span>|</span></a>
+
+        </div>
+        </div>
+</div>
+
+<!-- Add Suppliers button when clicked shows form-->
+
+{% block content %}
+<div class="addSupplierForm">
+    <form method="post" action="{% url 'add_supplier' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+<!-- Supplier Details Form -->
+    <div class="form-section">
+        <h4>New Supplier Record</h4>
+    <div class="form-group-row">
+        <div class="form-group">
+            {{ form.supplier_legalName.label_tag }}
+            {{ form.supplier_legalName }}
+        </div>
+
+        <div class="form-group">
+            {{ form.supplier_TradeName.label_tag }}
+            {{ form.supplier_TradeName }}
+        </div>
+
+        <div class="form-group">
+            {{ form.supplier_GSTReGNo.label_tag }}
+            {{ form.supplier_GSTReGNo }}
+        </div>
+
+        <div class="form-group">
+            {{ form.category.label_tag }}
+            {{ form.category }}
+        </div>
+    </div>
+
+    <!-- Contact Details -->
+
+    <div class="form-group-row">
+        <div class="form-group">
+            {{ form.contact_name.label_tag }}
+            {{ form.contact_name }}
+        </div>
+
+        <div class="form-group">
+            {{ form.contact_email.label_tag }}
+            {{ form.contact_email }}
+        </div>
+
+        <div class="form-group">
+            {{ form.contact_PhoneNumber.label_tag }}
+            {{ form.contact_PhoneNumber }}
+        </div>
+
+        <div class="form-group">
+            {{ form.contact_address1.label_tag }}
+            {{ form.contact_address1 }}
+        </div>
+    </div>
+
+    <!-- Contract Details -->
+
+    <div class="form-group-row">
+        <div class="form-group">
+            {{ form.contract_startDate.label_tag }}
+            {{ form.contract_startDate }}
+        </div>
+
+        <div class="form-group">
+            {{ form.contract_EndDate.label_tag }}
+            {{ form.contract_EndDate }}
+        </div>
+        <div class="form-group">
+            {{ form.settlement_currency.label_tag }}
+            {{ form.settlement_currency }}
+        </div>
+        <div class="form-group">
+            {{ form.contract_Document.label_tag }}
+            {{ form.contract_Document }}
+        </div>
+    </div>
+
+    <button type="submit" class="addSuppliers-submit">Add Supplier</button>
+
+</div>
+</form>
+</div>
+{% endblock %}
+
+
+<div class="registeredSuppliers">
+ {% block registered %}
+  <div class="addedSuppliers">
+    <h2>Registered Suppliers:</h2>
+    <table class="table table-bordered table-hover" id="RegisteredSuppliersTable">
+      <thead>
+        <tr>
+              <th>Legal Name</th>
+              <th>Trade Name</th>
+              <th>GST Reg No</th>
+              <th>Contact Phone</th>
+              <th>Contact Email</th>
+              <th>Contract Start Date</th>
+              <th>Contract End Date</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for supplier in all_suppliers %}
+              <tr>
+                <td>{{ supplier.supplier_legalName }}</td>
+                <td>{{ supplier.supplier_TradeName }}</td>
+                <td>{{ supplier.supplier_GSTReGNo }}</td>
+                <td>{{ supplier.contact_PhoneNumber }}</td>
+                <td>{{ supplier.contact_email }}</td>
+                <td>{{ supplier.contract_startDate }}</td>
+                <td>{{ supplier.contract_EndDate }}</td>
+                <td>{{ supplier.get_status_display }}</td>
+                <td>
+                  <a href="">Edit</a>
+                  <a href="">Delete</a>
+                </td>
+              </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
+</div>
+</div>
+
+<script>
+  $(function() {
+    $(".datepicker").datepicker({
+      dateFormat: 'yy-mm-dd',
+      changeMonth: true,
+      changeYear: true,
+      yearRange: "-100:+10"  // Adjust the range as needed
+    });
+  });
+</script>
+</body>
+</html>

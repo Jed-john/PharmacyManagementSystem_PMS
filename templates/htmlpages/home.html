@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> SYj PharmacyManagementSystem</title>
+    <!--Link styles,bootstrap and fonts-->
+    <link rel="stylesheet" href="{% static 'css/accountsStyles/homestyles.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+</head>
+<body>
+<div class="main">
+    <!--homepage header-->
+    <div class="header">
+        <p id="strip-content"><span>Welcome</span> to SYj Solutions - Pharmacy Management System</p>
+    </div>
+    <!--homepage navigation bar-->
+    <div class="navbar">
+        <nav>
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="">Services</a></li>
+                <li><a href="">Contact Us</a></li>
+                <li><button id="accountbtn"><a href="{% url 'login' %}">SignUp /</a><a href="{% url 'login' %}"> LogIn</a></button></li>
+            </ul>
+        </nav>
+    </div>
+<!--homepage intro section both img and overlay text-->
+    <div class="intro">
+        <img src="{% static 'img/introimg.jpg' %}" alt="PharmacyManagement" id="introimg">
+    <div class="introTxt">
+        <p>SYj Pharmacy Management System</p>
+        <h1><strong>Crafted for Perfection: <br>Your Pharmacy's Best Friend</strong></h1>
+        <p>Simplify, optimize, and succeed with our Pharmacy Management System</p>
+        <button id="getStarted"><a href="{% url 'login' %}">Get Started</a></button>
+        <button id="services"><a href="">Explore Services</a></button>
+    </div>
+    </div>
+  <!--homepage service container-->
+ <div class="container">
+    <div class="item">
+        <img src="{% static 'img/healthcarecenter.jpg' %}" alt="healthcare center photo">
+        <div class="text">
+            <h3>Healthcare Center</h3>
+            <p>Your Comprehensive Healthcare <br>and Wellness Destination</p>
+        </div>
+    </div>
+    <div class="item">
+        <img src="{% static 'img/prescription.jpg' %}" alt="prescriptionphoto">
+        <div class="text">
+            <h3>Pharmacy Store</h3>
+            <p>Reliable Prescription and <br>Diverse Medical Choices</p>
+        </div>
+    </div>
+    <div class="item">
+        <img src="{% static 'img/medicalservice.jpg' %}" alt="medical services photo">
+        <div class="text">
+            <h3>Medical Services</h3>
+            <p>Dedicated to Your Health <br>and Wellness</p>
+        </div>
+    </div>
+</div>
+    <hr>
+    <hr>
+<!--homepage services and system description/about-->
+    <div class="about">
+        <div class="aboutTxt">
+         <h1>About SYj Pharmacy Management System</h1>
+        <p>The <span>SYj Solutions - Pharmacy Management System </span>– is an innovative solution designed to transform the way pharmacies operate. In an era defined by technological advancements, the need for a streamlined, efficient, and error-free approach to pharmacy management has never been more crucial. Our cutting-edge system redefines the standard, offering an all-encompassing platform that empowers pharmacies to optimize operations, enhance patient care, and achieve unparalleled accuracy.
+            At JS, we understand the unique challenges faced by pharmacies today. Whether you're a community pharmacy, a hospital pharmacy, or part of a larger healthcare organization, our Pharmacy Management System is your answer to improved workflow, cost-effectiveness, and patient safety. Join us on a journey to revolutionize pharmacy management and unlock new levels of precision and efficiency, ultimately improving the overall health and well-being of your community.</p>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-5">
+                <img src="{% static 'img/medicalservice.jpg' %}" alt="" width="200px" height="200px">
+            </div>
+            <div class="col-sm-6">
+                <p>About Us</p>
+                <h1>With Us, expect More than just a Pharmacy</h1>
+                <p>Total Healthcare Support in One Center</p>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img src="{% static 'img/caregiving.png' %}" alt="">
+                    </div>
+                    <div class="col-sm-4">
+                        <img src="{% static 'img/heart.png' %}" alt="">
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <footer>
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="">Services</a></li>
+                <li><a href="">Contact Us</a></li>
+
+            </ul>
+        </footer>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+.medicineSection  {
+    width: calc(100% - 225px);
+    margin-left: 235px;
+    margin-top: 30px;
+}
+
+.medicineSection .manageMedicine{
+    background: #6DC3D0;
+    margin-left: 10px;
+    height: 85px;
+    padding-left:15px;
+    display: flex;
+    justify-content:space-between;
+
+}
+.medicineSection .manageMedicine .medicineBtn .addMedicine_btn{
+    margin-right: 350px;
+    width: 250px;
+    padding: 10px;
+    margin-top: 15px;
+    background-color: #8BAB11;
+    border-style: none;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.medicineSection .manageMedicine .medicineBtn{
+    margin-right: 200px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+.medicineSection .manageMedicine .medicineBtn #new{
+    margin-left: 30px;
+    width: 100px;
+    background-color: darkgoldenrod;
+    border-style: none;
+    font-size: 23px;
+
+}
+.medicineSection .manageMedicine .medicineBtn #update{
+    margin-left: 30px;
+    width: 100px;
+    background-color: #4caf50;
+    border-style: none;
+    font-size: 23px;
+}
+.medicineSection .manageMedicine .medicineBtn #delete{
+    margin-left: 30px;
+    width: 100px;
+    background-color: darkgoldenrod;
+    border-style: none;
+    font-size: 23px;
+
+}
+.medicineSection .manageMedicine .medicineBtn span{
+    color: black;
+    background-color: #6DC3D0;
+    font-size: 40px;
+}
+
+/* add medicine form */
+.addMedicineForm {
+  margin-left: 285px;
+    width: 600px;
+    margin-bottom: 20px;
+}
+
+.addMedicineForm form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+    height: 150px;
+  box-sizing: border-box;
+}
+.form-group {
+  flex: 1;
+  margin-right: 10px;
+}
+.addMedicine-submit{
+    width: 400px;
+    background-color: #8BAB11;
+    padding: 5px;
+}
+.medicine-input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.registeredMedicine .addedMedicine{
+    margin-left: 255px;
+    width: calc(100% - 265px)
+}
+.registeredMedicine .addedMedicine #RegisteredMedicineTable tr:hover{
+    color: rgb(5, 68, 104);
+    background: #D3D3D3;
+    border-right: 2px solid rgb(5, 68, 104);
+    border-left: 2px solid rgb(5, 68, 104);
+}

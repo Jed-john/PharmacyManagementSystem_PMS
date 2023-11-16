@@ -1,0 +1,41 @@
+{% extends 'pharmacypages/manageMedicine/base.html' %}
+<div class="addMedicineForm">
+ {% block content %}
+  <div class="addedMedicine">
+
+      {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <h2>Registered Medicines:</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Medicine Name</th>
+          <th>Description</th>
+          <th>Unit Volume</th>
+          <th>Price Per Unit Volume</th>
+          <th>Count</th>
+          <th>Created At</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for medicine in all_medicines %}
+          <tr>
+            <td>{{ medicine.medicine_name }}</td>
+            <td>{{ medicine.description }}</td>
+            <td>{{ medicine.unitVolume }}</td>
+            <td>{{ medicine.pricePerUnitVolume }}</td>
+            <td>{{ medicine.count }}</td>
+            <td>{{ medicine.created_at }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
+</div>

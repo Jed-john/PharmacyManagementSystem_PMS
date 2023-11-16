@@ -1,0 +1,140 @@
+.main  {
+    margin: auto;
+    padding: 0;
+}
+/*Header styles*/
+.main .header #strip-content{
+    background-color: #8BAB11;
+    padding: 10px;
+    text-align: center;
+    font-size: 12px;
+
+}
+.main .header #strip-content span{
+    color: white;
+    font-weight: bolder;
+    font-family: Tahoma;
+}
+/*navigation bar styles*/
+.navbar nav{
+    float: right;
+    margin-right: 70px;
+}
+.navbar nav ul li{
+    list-style: none;
+    display: inline;
+    background-color: white;
+    padding: 15px;
+}
+.navbar nav ul li #accountbtn{
+    padding: 10px;
+    margin-left: 30px;
+
+}
+/*intro styles*/
+.intro{
+    position: relative;
+}
+.intro #introimg{
+    width: 100%;
+    height: 450px;
+    filter: blur(1.2px);
+}
+.intro .introTxt{
+    position: absolute;
+    left: 60px;
+    top: 100px;
+    color: black;
+
+    background-color: lightgrey;
+    padding: 20px;
+border-style: none;
+}
+.intro .introTxt h1{
+    color: #337AB7;
+}
+.intro .introTxt #getStarted{
+    background-color:#8BAB11 ;
+    padding: 16px;
+    width: 150px;
+    border-style: none;
+}
+.intro .introTxt #getStarted a{
+    color: white;
+    font-weight: bolder;
+    text-decoration: none;
+    font-size: 18px;
+}
+.intro .introTxt #services{
+    border-radius: 40px;
+    width: 200px;
+    padding: 16px;
+    background-color: transparent;
+}
+.intro .introTxt #services a{
+    color: darkslategrey;
+    font-weight: bolder;
+    text-decoration: none;
+    font-size: 14px;
+}
+/*container styles*/
+.container {
+    display: flex;
+    background-color: #8BAB11;
+    border-radius: 50px;
+}
+
+.container .item {
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+    padding: 10px; /* Adjust as needed */
+}
+
+.container .item img {
+    width: 80px;
+    height: 50px;
+    margin-right: 10px; /* Adjust as needed for spacing */
+}
+
+.container .item .text {
+    display: flex;
+    flex-direction: column;
+
+}
+.item .text h3,
+.item .text p {
+    text-align: left; /* Adjust as needed */
+    margin: 2px; /* Remove default margins */
+}
+.item .text h3{
+    color: white;
+}
+.container .item p {
+    font-size: 12px;
+}
+
+/* about */
+.about .aboutTxt p{
+    margin: 25px;
+    text-align: center;
+    line-height: 20px;
+    font-family: Tahoma;
+
+}
+.row {
+    margin: 50px;
+}
+
+.footer footer {
+    background-color: dimgrey;
+}
+.footer footer ul{
+    list-style: none;
+}
+.footer footer ul a{
+    font-size: 14px;
+    color: white;
+}
+
+
