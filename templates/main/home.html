@@ -22,26 +22,26 @@
     <div class="navbar">
         <nav>
             <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="">Services</a></li>
-                <li><a href="">Contact Us</a></li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#Services">Services</a></li>
                 <li><button id="accountbtn"><a href="{% url 'login' %}">SignUp /</a><a href="{% url 'login' %}"> LogIn</a></button></li>
             </ul>
         </nav>
     </div>
 <!--homepage intro section both img and overlay text-->
-    <div class="intro">
+    <div class="intro" id="home">
         <img src="{% static 'img/introimg.jpg' %}" alt="PharmacyManagement" id="introimg">
     <div class="introTxt">
         <p>SYj Pharmacy Management System</p>
         <h1><strong>Crafted for Perfection: <br>Your Pharmacy's Best Friend</strong></h1>
         <p>Simplify, optimize, and succeed with our Pharmacy Management System</p>
         <button id="getStarted"><a href="{% url 'login' %}">Get Started</a></button>
-        <button id="services"><a href="">Explore Services</a></button>
+        <button id="services"><a href="#Services">What's Offered</a></button>
+
     </div>
     </div>
-  <!--homepage service container-->
+  <!--homepage description/what to find container-->
  <div class="container">
     <div class="item">
         <img src="{% static 'img/healthcarecenter.jpg' %}" alt="healthcare center photo">
@@ -68,45 +68,75 @@
     <hr>
     <hr>
 <!--homepage services and system description/about-->
-    <div class="about">
+    <div class="about" id="about">
         <div class="aboutTxt">
          <h1>About SYj Pharmacy Management System</h1>
         <p>The <span>SYj Solutions - Pharmacy Management System </span>– is an innovative solution designed to transform the way pharmacies operate. In an era defined by technological advancements, the need for a streamlined, efficient, and error-free approach to pharmacy management has never been more crucial. Our cutting-edge system redefines the standard, offering an all-encompassing platform that empowers pharmacies to optimize operations, enhance patient care, and achieve unparalleled accuracy.
             At JS, we understand the unique challenges faced by pharmacies today. Whether you're a community pharmacy, a hospital pharmacy, or part of a larger healthcare organization, our Pharmacy Management System is your answer to improved workflow, cost-effectiveness, and patient safety. Join us on a journey to revolutionize pharmacy management and unlock new levels of precision and efficiency, ultimately improving the overall health and well-being of your community.</p>
         </div>
 
-        <div class="row">
+        <div class="row1">
             <div class="col-sm-5">
-                <img src="{% static 'img/medicalservice.jpg' %}" alt="" width="200px" height="200px">
+                <img src="{% static 'img/medicalservice.jpg' %}" alt="" width="500px" height="500px">
             </div>
             <div class="col-sm-6">
-                <p>About Us</p>
-                <h1>With Us, expect More than just a Pharmacy</h1>
+                <h3>About Us</h3>
+                <h1 class="withUs">With Us, expect More than just a Pharmacy</h1>
                 <p>Total Healthcare Support in One Center</p>
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                         <img src="{% static 'img/caregiving.png' %}" alt="">
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                         <img src="{% static 'img/heart.png' %}" alt="">
                     </div>
+
                 </div>
-                
             </div>
+
+            <div class="row3"  id="Services">
+                        <div class="col-sm-2" style="background-color: #6DC3D0">
+                            <h3>Medicine</h3>
+                            <p>Store Record Keeping;both online and physical</p>
+                        </div>
+                        <div class="col-sm-2" style="background-color: #6DC3D0" >
+                            <h3>Clients</h3>
+                            <p>Access your customer(s) medical info </p>
+                        </div>
+                        <div class="col-sm-2" style="background-color: #6DC3D0">
+                            <h3>Suppliers</h3>
+                            <p>Track Active and Inactive suppliers</p>
+                        </div>
+                    </div>
         </div>
     </div>
 
-    <div class="footer">
-        <footer>
-            <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="">Services</a></li>
-                <li><a href="">Contact Us</a></li>
+</div>
 
-            </ul>
-        </footer>
-    </div>
+<!-- homepage footer -->
+<div class="footer">
+    <footer>
+        <div class="links">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#Services">Services</a></li>
+            <li><a href="">Contact Us</a></li>
+
+        </ul>
+            </div>
+        <div class="contact">
+        <p><br><br><br>
+            <i class="fa fa-envelope"></i> syombuajedidah0@gmail.com
+            <i class="fa fa-whatsapp"></i> +254791182271
+        </p>
+        </div>
+        <div class="copyright">
+
+        <p><br><br><br>&copy; 2023 SYj Solutions - Pharmacy Management System</p>
+            <p>Developed by: Syombua Jedidah</p>
+            </div>
+    </footer>
 </div>
 </body>
 </html>

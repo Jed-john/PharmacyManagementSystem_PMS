@@ -15,6 +15,10 @@ class AddMedicine(models.Model):
     unitVolume = models.CharField(max_length=50)
     pricePerUnitVolume = models.CharField(max_length=50)
     count = models.IntegerField()
+    expiryDate = models.DateField()
+
+    # field for storing image path or URL that is used in online store
+    image = models.ImageField(upload_to='medicine_images/', blank=True, null=True)
 
     created_at = models.DateTimeField(default=timezone.now)
 

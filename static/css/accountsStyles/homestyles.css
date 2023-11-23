@@ -1,6 +1,6 @@
 .main  {
     margin: auto;
-    padding: 0;
+    scroll-behavior: smooth;
 }
 /*Header styles*/
 .main .header #strip-content{
@@ -122,19 +122,52 @@ border-style: none;
     font-family: Tahoma;
 
 }
-.row {
-    margin: 50px;
+.about h3{
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: #8BAB11;
+}
+.about .withUs{
+    color: #8BAB11;
+    font-weight: bolder;
+}
+.about .row1 {
+    margin-top: 50px;
+
 }
 
-.footer footer {
+/* footer styles */
+
+.footer {
     background-color: dimgrey;
+    color: white;
+    padding: 20px;
+    position: static;
+    margin-top: 100vh;
+    bottom: 10px;
+    width: 100%;
+    z-index: 100;
+    height: 130px;
 }
-.footer footer ul{
+
+.footer footer ul {
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
-.footer footer ul a{
+
+.footer footer ul a {
     font-size: 14px;
     color: white;
+    text-decoration: none;
 }
 
-
+.footer .links{
+    float: left;
+}
+.footer .contact{
+    float: right;
+}
+.footer .copyright{
+    text-align: center;
+}

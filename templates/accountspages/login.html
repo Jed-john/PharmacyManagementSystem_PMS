@@ -11,15 +11,22 @@
 <body>
     <h1>Login</h1>
 <div class="loginform">
+    {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
     <form action="{% url 'login' %}" method="POST">
-            <p>Not yet registered?!</p>
-        <div class="signupLinks">
-    <a href="{% url 'pharmacist-signup' %}">Signup as Pharmacist</a> &nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="{% url 'customer-signup' %}">Signup as Customer</a>
-            </div>
-        <h3>OR</h3>
+        <h3>Enter LogIn Credentials</h3>
         {% csrf_token %}
         {{ form.as_p }}
+        <p>Not yet registered?!</p>
+        <div class="signupLinks">
+    <a href="{% url 'pharmacist-signup' %}">Signup as Pharmacist</a> &nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="{% url 'customer-signup' %}">Signup as Customer</a> <br><br>
+            </div>
         <input type="submit" value="Login">
     </form>
 

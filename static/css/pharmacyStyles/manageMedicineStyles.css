@@ -59,51 +59,188 @@
     font-size: 40px;
 }
 
-/* add medicine form */
+/* add medicine form styles*/
 .addMedicineForm {
   margin-left: 285px;
-    width: 600px;
+    width: 800px;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
-.addMedicineForm form {
-  display: flex;
-  flex-direction: column;
-}
 
-.form-row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-.form-group textarea {
-  width: 100%;
-  padding: 8px;
-    height: 150px;
-  box-sizing: border-box;
-}
-.form-group {
-  flex: 1;
-  margin-right: 10px;
-}
 .addMedicine-submit{
-    width: 400px;
+    width: 700px;
     background-color: #8BAB11;
     padding: 5px;
 }
-.medicine-input {
-  width: 100%;
-  padding: 8px;
-  box-sizing: border-box;
+
+.datepicker {
+    width: 100%;
+    margin-bottom: 10px;
+    box-sizing: border-box;
 }
 
+
+/* registered medicine displayed in a table styles */
 .registeredMedicine .addedMedicine{
     margin-left: 255px;
-    width: calc(100% - 265px)
+    width: calc(100% - 265px);
+    background-color: #D3D3D3;
+    padding-top: 2px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
+.registeredMedicine .addedMedicine #RegisteredMedicineTable th{
+    font-weight: bolder;
+    font-size: 14px;
+    color: #10558d;
 }
 .registeredMedicine .addedMedicine #RegisteredMedicineTable tr:hover{
     color: rgb(5, 68, 104);
-    background: #D3D3D3;
+    background: white;
     border-right: 2px solid rgb(5, 68, 104);
     border-left: 2px solid rgb(5, 68, 104);
+}
+
+/*edit medicine form styles */
+.editMedicineForm{
+    background-color: #D3D3D3;
+    width: 800px;
+    padding: 10px;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.form-group textarea {
+    width: 100%;
+    padding: 4px;
+    height: 70px;
+    box-sizing: border-box;
+}
+
+.medicine-input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.form-group {
+    flex: 1;
+    margin-right: 10px;
+}
+.editMedicineForm #save{
+    background-color: #8BAB11;
+    width: 400px;
+    padding: 3px;
+}
+.editMedicineForm #save:hover{
+    background-color: #6DC3D0;
+    color: white;
+}
+
+.editMedicineForm #discard{
+    background-color: #8BAB11;
+    width: 300px;
+    padding: 3px;
+}
+.editMedicineForm #discard:hover{
+    background-color: #6DC3D0;
+    color: white;
+}
+
+/*in add medicine success in the top nav */
+.editmedicineBtn button{
+    background-color: darkgoldenrod;
+    padding: 10px;
+    margin-right: 100px;
+    margin-top: 30px;
+    border-style: none;
+}
+
+
+/* STYLES FOR ADD MEDICINE SUCCESS */
+.addMedicineForm .messages{
+    color: #8BAB11;
+}
+.addMedicineForm .addedMedicine{
+    width: 100%;
+    background-color: #D3D3D3;
+    padding-top: 2px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+}
+.addMedicineForm .addedMedicine .table th{
+    font-weight: bolder;
+    font-size: 14px;
+    color: #10558d;
+}
+.addMedicineForm .addedMedicine .table tr:hover{
+    color: #8BAB11;
+    font-weight: bolder;
+    background: white;
+    border-right: 2px solid rgb(5, 68, 104);
+    border-left: 2px solid rgb(5, 68, 104);
+}
+/*styles for delete medicine */
+.deleteMedicineForm {
+    height: 100vh;
+  }
+
+.deleteMedicineCard {
+    background-color: #D3D3D3;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    width: 100%;
+  }
+
+  .deleteMedicineCard p {
+    font-size: 16px;
+    margin-bottom: 15px;
+      color: #dc3545;
+      font-weight: bolder;
+  }
+
+  .deleteMedicineCard ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .deleteMedicineCard li {
+    margin-bottom: 10px;
+  }
+
+  .deleteButton,
+  .cancelButton {
+    padding: 10px;
+    margin-top: 10px;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+  }
+
+.deleteButton {
+    background-color: #dc3545;
+    width: 200px;
+  }
+.deleteButton:hover{
+    font-size: 16px;
+}
+.cancelButton {
+        background-color: #6c757d; /* Bootstrap's secondary color */
+        margin-left: 10px;
+        width: 200px;
+  }
+.cancelButton a{
+    color: #D3D3D3;
+}
+.cancelButton a:hover{
+    text-decoration: none;
+    color: white;
 }

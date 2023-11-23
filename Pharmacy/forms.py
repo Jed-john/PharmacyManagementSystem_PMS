@@ -9,10 +9,14 @@ class AddMedicineForm(forms.ModelForm):
     unitVolume = forms.CharField(widget=forms.TextInput(attrs={'class': 'medicine-input'}))
     pricePerUnitVolume = forms.CharField(widget=forms.TextInput(attrs={'class': 'medicine-input'}))
     count = forms.CharField(widget=forms.TextInput(attrs={'class': 'medicine-input'}))
+    expiryDate = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'class': 'datepicker'}))
 
     class Meta:
         model = AddMedicine
-        fields = ('medicine_name', 'description', 'unitVolume', 'pricePerUnitVolume', 'count')
+        fields = ('medicine_name', 'description', 'unitVolume', 'pricePerUnitVolume', 'count','expiryDate')
+        widgets = {
+            'expiryDate': forms.TextInput(attrs={'class': 'datepicker'}),
+        }
 
 
 # Add supplier form
@@ -46,3 +50,13 @@ class AddSupplierForm(forms.ModelForm):
     contract_EndDate = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'class': 'datepicker supplier-input'}))
     contract_Document = forms.FileField(widget=forms.FileInput(attrs={'class': 'supplier-input'}))
 
+
+# form to add image to be associated with medicine
+class ImageAssociationForm(forms.ModelForm):
+    class Meta:
+        model = AddMedicine
+        fields = ['image']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['image'].widget.attrs.update({'class': 'file-input'})

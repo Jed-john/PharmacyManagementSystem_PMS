@@ -9,6 +9,8 @@
 .main_content{
     height: 100vh;
 }
+
+/* side bar styles */
 .main_content .sidebar {
     background: #91B150;
     position: fixed;
@@ -91,7 +93,7 @@
     font-size: 18px;
 }
 
-/*top bar*/
+/*top bar styles*/
 .menu .section{
     width: calc(100% - 225px);
     margin-left: 225px;
@@ -120,20 +122,155 @@
     font-size: 45px;
     margin:15px;
 }
-/*top bar*/
-footer .section{
-    width: calc(100% - 225px);
-    margin-left: 225px;
-    position: static;
-    margin-top: auto;
+
+/* styles for user icon that gives option to logout when hovered on */
+.dropdown {
+    position: relative;
+    display: inline-block;
 }
 
-footer .section .footer{
-    background: grey;
-    height: 70px;
+.dropdown-menu {
+    top: 60px;
+    display: none;
+    position: absolute;
+    background-color: #91B150;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 10px;
+
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/*specific to pharmacist home without affecting other pharmacist pages */
+.main_content .home-sidebar {
+    background: #91B150;
+    position: fixed;
+    left: 2px;
+    width: 235px;
+    margin-top: 65px;
+    height: 86%;
+    padding: 10px 0;
+    transition: all 0.5s ease;
+}
+.home-menu .home-sidebar .profile{
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.home-menu .home-sidebar .profile img{
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.home-menu .home-sidebar .profile h4{
+    color: black;
+    margin: 10px 0 5px;
+
+}
+
+.home-menu .home-sidebar .profile p{
+    color: white;
+    font-size: 14px;
+}
+
+.home-menu .home-sidebar ul li a{
+    display: block;
+    padding: 8px;
+    border-bottom: 1px solid #10558d;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;
+
+}
+.home-menu .home-sidebar ul li a .icon{
+
+    width: 30px;
+    display: inline-block;
+}
+
+.home-menu .home-sidebar ul li a span{
+    font-size: 14px;
+}
+/* icon colors */
+.home-menu .home-sidebar ul li a .icon #dashboard{
+    color: #337AB7;
+}
+.home-menu .home-sidebar ul li a .icon #medicine{
+    color: coral;
+}
+.home-menu .home-sidebar ul li a .icon #clients{
+    color: #45a049;
+}
+.home-menu .home-sidebar ul li a .icon #suppliers{
+    color: #337AB7;
+}
+.home-menu .home-sidebar ul li a .icon #reports{
+    color: coral;
+}
+.home-menu .home-sidebar ul li a .icon #settings{
+    color: #45a049;
+}
+
+
+.home-menu .home-sidebar ul li a:hover {
+    color: rgb(5, 68, 104);
+    background: #D3D3D3;
+    border-right: 2px solid rgb(5, 68, 104);
+    font-weight: bolder;
+    font-size: 18px;
+}
+
+/*top bar for home without affecting other pharmacy pages*/
+.home-menu .home-section{
+    width: 100%;
+    position: fixed;
+    transition: all 0.5s ease;
+}
+
+.home-menu .home-section .top_navbar{
+    background-color: #6DC3D0;
+    height: 55px;
     display: flex;
     align-items: center;
-    padding: 0 30px;
-
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left:20px;
+    justify-content: space-between;
+}
+.home-menu .home-section .top_navbar h4{
+    color: black;
+}
+.home-menu .home-section .top_navbar .bar_icons a{
+    color: black;
+}
+.home-menu .home-section .top_navbar .bar_icons span{
+    padding-left: 30px;
+}
+.home-menu .home-section .top_navbar .bar_icons i{
+    font-size: 45px;
+    margin:15px;
 }
 
+/* footer styles */
+.footer {
+    background-color: grey;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    left: 2px;
+    top: 93%;
+    width: 100%;
+}

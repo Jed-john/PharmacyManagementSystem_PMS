@@ -30,4 +30,8 @@ class Customer(models.Model):
     telephone_number = models.CharField(max_length=100)
 
     created_at = models.DateTimeField(default=timezone.now)
+    my_pharmacist = models.ForeignKey(Pharmacist, null=True, blank=True, on_delete=models.SET_NULL,
+                                      related_name='my_customers')
 
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"

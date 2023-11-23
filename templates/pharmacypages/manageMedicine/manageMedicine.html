@@ -14,6 +14,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 </head>
 <body>
 <div class="main_content">
@@ -27,11 +31,10 @@
             </div>
 
         <ul>
-
                 <li>
-                    <a href="{% url 'dashboard' %}" class="active">
+                    <a href="{% url 'pharmacist-home' %}" class="active">
                         <span class="icon"><i class="fas fa-desktop" id="dashboard"></i></span>
-                        <span class="item">My Dashboard</span>
+                        <span class="item">Pharmacist Home</span>
                     </a>
                 </li>
                 <li>
@@ -40,16 +43,17 @@
                         <span class="item">Manage Medicine</span>
                     </a>
                 </li>
+
                 <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-tachometer-alt" id="clients"></i></span>
-                        <span class="item">Manage Clients</span>
+                    <a href="{% url 'online_store' %}">
+                        <span class="icon"><i class="fas fa-tachometer-alt" id="store"></i></span>
+                        <span class="item">Online Store</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-database" id="sales"></i></span>
-                        <span class="item">Manage Sales</span>
+                    <a href="{% url 'manageClients' %}">
+                        <span class="icon"><i class="fas fa-tachometer-alt" id="clients"></i></span>
+                        <span class="item">Manage Clients</span>
                     </a>
                 </li>
 
@@ -66,12 +70,6 @@
                     </a>
                 </li>
 
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-cog" id="settings"></i></span>
-                        <span class="item">Settings</span>
-                    </a>
-                </li>
             </ul>
         </div>
 
@@ -91,7 +89,16 @@
                 <div class="bar_icons">
                 <span class="glyphicon glyphicon-search"><a href=""></a></span>
                  <a href=""><span class="glyphicon glyphicon-bell"><a href=""></a></span></a>
-                <a href="">  <i class="fa fa-user-circle" aria-hidden="true"></i></a>
+                <!-- Add a div for the user dropdown -->
+            <div class="dropdown">
+        <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-user-circle" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="userDropdown">
+            <!-- Add a link for the Django LogoutView -->
+            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+        </div>
+    </div>
                     </div>
             </div>
          </div>
@@ -104,9 +111,9 @@
         <div class="medicineBtn">
             <a href="{% url 'addMedicine' %}"><button id="new"> New </button><span>|</span></a>
 
-            <a href=""><button id="update"> Update </button><span>|</span></a>
+            <a href="{% url 'manageMedicine' %}"><button id="update"> Update </button><span>|</span></a>
 
-            <a href=""><button id="delete"> Delete</button><span>|</span></a>
+            <a href="{% url 'manageMedicine' %}"><button id="delete"> Delete</button><span>|</span></a>
 
         </div>
         </div>
@@ -118,38 +125,21 @@
     {% block add %}
   <form method="post" action="{% url 'addMedicine' %}">
     {% csrf_token %}
-    <div class="form-group">
-      {{ form.medicine_name.label_tag }}
-      {{ form.medicine_name }}
-    </div>
 
-    <div class="form-group">
-      {{ form.description.label_tag }}
-      {{ form.description }}
-    </div>
-
-    <div class="form-row">
-      <div class="form-group">
-        {{ form.unitVolume.label_tag }}
-        {{ form.unitVolume }}
-      </div>
-      <div class="form-group">
-        {{ form.pricePerUnitVolume.label_tag }}
-        {{ form.pricePerUnitVolume }}
-      </div>
-      <div class="form-group">
-        {{ form.count.label_tag }}
-        {{ form.count }}
-      </div>
-    </div>
-
-      <button type="submit" class="addMedicine-submit">Add Medicine</button>
+      <button type="submit" class="addMedicine-submit">Add New Medicine</button>
 
   </form>
 </div>
 {% endblock %}
 
 <div class="registeredMedicine">
+{% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
  {% block content %}
   <div class="addedMedicine">
     <h2>Registered Medicines:</h2>
@@ -159,9 +149,10 @@
           <th>Medicine Name</th>
           <th>Description</th>
           <th>Unit Volume</th>
+          <th>Expiry Date</th>
           <th>Price Per Unit Volume</th>
           <th>Count</th>
-          <th>Created At</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -170,8 +161,9 @@
             <td>{{ medicine.medicine_name }}</td>
             <td>{{ medicine.description }}</td>
             <td>{{ medicine.unitVolume }}</td>
+            <td>{{ medicine.expiryDate}}</td>
+            <td>{{ medicine.pricePerUnitVolume }}</td>
             <td>{{ medicine.count }}</td>
-            <td>{{ medicine.created_at }}</td>
             <td>
                         <a href="{% url 'edit_medicine' medicine.id %}">Edit</a>
                         <a href="{% url 'delete_medicine' medicine.id %}">Delete</a>
@@ -186,5 +178,28 @@
 
 
 </div>
+
+
+<!-- footer -->
+<footer>
+<div class="section">
+            <div class="footer">
+             <h4>Pharmacy Management System</h4>
+                <h5>Developed by: Syombua Jedidah</h5>
+                <p><br>&copy 2023 SYj Solutions - Pharmacy Management System &nbsp;</p>
+            </div>
+         </div>
+    </footer>
+
+<script>
+  $(function() {
+    $(".datepicker").datepicker({
+      dateFormat: 'yy-mm-dd',
+      changeMonth: true,
+      changeYear: true,
+      yearRange: "-100:+10"  // Adjust the range as needed
+    });
+  });
+</script>
 </body>
 </html>

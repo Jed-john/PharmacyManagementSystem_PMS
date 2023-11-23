@@ -2,20 +2,13 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 
-from Pharmacy.forms import AddMedicineForm, AddSupplierForm
+from Pharmacy.forms import AddMedicineForm, AddSupplierForm, ImageAssociationForm
 from Pharmacy.models import AddMedicine, AddSupplier
 from accounts.decorators import pharmacist_required
 from accounts.models import Pharmacist
 
 
 # Create your views here.
-
-
-# pharmacist dashboard views.
-@login_required
-@pharmacist_required
-def pharmacist_dashboard(request):
-    return render(request, 'pharmacypages/dashboard/pharmacist_dashboard.html')
 
 
 # manage Medicines Views
@@ -25,6 +18,7 @@ def manage_medicine(request):
     pharmacist_instance = Pharmacist.objects.get(user=request.user)
     all_medicines = AddMedicine.objects.filter(pharmacist=pharmacist_instance)
     return render(request, 'pharmacypages/manageMedicine/manageMedicine.html', {'all_medicines': all_medicines})
+
 
 @login_required
 @pharmacist_required
@@ -46,7 +40,7 @@ def add_medicine(request):
     # Get all medicines for display
     all_medicines = AddMedicine.objects.filter(pharmacist=pharmacist_instance)
 
-    return render(request, 'pharmacypages/manageMedicine/manageMedicine.html', {'form': form})
+    return render(request, 'pharmacypages/manageMedicine/addmedicine.html', {'form': form})
 
 
 @login_required
@@ -70,8 +64,11 @@ def edit_medicine(request, medicine_id):
         form = AddMedicineForm(request.POST, instance=medicine)
         if form.is_valid():
             form.save()
-            # Redirect to a success page or back to manage_medicine
-            return redirect('manage_medicine')
+            print("Medicine saved successfully!")  # for debugging
+            return redirect('manageMedicine')
+        else:
+            print("Form is not valid!")  # for debugging
+            return render(request, 'pharmacypages/manageMedicine/edit_medicine.html', {'form': form, 'medicine': medicine})
     else:
         form = AddMedicineForm(instance=medicine)
 
@@ -87,10 +84,10 @@ def delete_medicine(request, medicine_id):
     if request.method == 'POST':
         # Handle form submission to delete the medicine
         medicine.delete()
-        return redirect('manage_medicine')  # Redirect to the manage_medicine page
+        messages.success(request, "Medicine Record deleted successfully.")
+        return redirect('manageMedicine')  # Redirect to the managemedicine page
 
     return render(request, 'pharmacypages/manageMedicine/delete_medicine.html', {'medicine': medicine})
-
 
 # pharmacist manage suppliers views
 @login_required
@@ -134,3 +131,34 @@ def add_supplier_success(request):
 
     return render(request, 'pharmacypages/manageSuppliers/add_Supplier_success.html', {'all_suppliers': all_suppliers})
 
+
+# pharmacist online store views
+# associate already registered medicine with an image and update stockcount
+@login_required
+@pharmacist_required
+def online_store(request):
+    pharmacist_instance = Pharmacist.objects.get(user=request.user)
+    all_medicines = AddMedicine.objects.filter(pharmacist=pharmacist_instance)
+    return render(request, 'pharmacypages/onlineStore/displayMedicine.html', {'all_medicines': all_medicines})
+
+
+@login_required
+@pharmacist_required
+def associate_image(request, medicine_id):
+    medicine = get_object_or_404(AddMedicine, id=medicine_id)
+
+    if request.method == 'POST':
+        form = ImageAssociationForm(request.POST, request.FILES, instance=medicine)
+        if form.is_valid():
+            form.save()
+            return redirect('associate-image',medicine_id=medicine.id)
+    else:
+        form = ImageAssociationForm(instance=medicine)
+
+    return render(request, 'pharmacypages/onlineStore/associate_image.html', {'form': form, 'medicine': medicine})
+
+
+def manage_clients(request):
+    pharmacist = request.user.pharmacist
+    my_customers = pharmacist.my_customers.all()
+    return render(request, 'pharmacypages/manageClients/myClients.html', {'pharmacist': pharmacist, 'my_customers': my_customers})

@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block header_title %}Pharmacist{% endblock %}</title>
+    <title>{% block header_title %}ManageMedicine{% endblock %}</title>
 
     <link rel="stylesheet" href="{% static 'css/accountsStyles/pharmacist_homestyles.css' %}">
     <link rel="stylesheet" href="{% static 'css/pharmacyStyles/manageMedicineStyles.css' %}">
@@ -28,9 +28,9 @@
         <ul>
 
                 <li>
-                    <a href="{% url 'dashboard' %}" class="active">
+                    <a href="{% url 'pharmacist-home' %}" class="active">
                         <span class="icon"><i class="fas fa-desktop" id="dashboard"></i></span>
-                        <span class="item">My Dashboard</span>
+                        <span class="item">Pharmacist Home</span>
                     </a>
                 </li>
                 <li>
@@ -40,15 +40,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-tachometer-alt" id="clients"></i></span>
-                        <span class="item">Manage Clients</span>
+                    <a href="{% url 'online_store' %}">
+                        <span class="icon"><i class="fas fa-tachometer-alt" id="store"></i></span>
+                        <span class="item">Online Store</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-database" id="sales"></i></span>
-                        <span class="item">Manage Sales</span>
+                    <a href="{% url 'manageClients' %}">
+                        <span class="icon"><i class="fas fa-tachometer-alt" id="clients"></i></span>
+                        <span class="item">Manage Clients</span>
                     </a>
                 </li>
 
@@ -65,12 +65,6 @@
                     </a>
                 </li>
 
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-cog" id="settings"></i></span>
-                        <span class="item">Settings</span>
-                    </a>
-                </li>
             </ul>
         </div>
 
@@ -85,12 +79,21 @@
                 </div>
                 -->
 
-             <h2>Pharmacist Dashboard</h2>
+             <h4>Manage Medicine: Medicine Records</h4>
                 <h4>Date Today: {% now "N j, Y" %}. </h4>
                 <div class="bar_icons">
                 <span class="glyphicon glyphicon-search"><a href=""></a></span>
                  <a href=""><span class="glyphicon glyphicon-bell"><a href=""></a></span></a>
-                <a href="">  <i class="fa fa-user-circle" aria-hidden="true"></i></a>
+                <!-- Add a div for the user dropdown -->
+            <div class="dropdown">
+        <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-user-circle" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="userDropdown">
+            <!-- Add a link for the Django LogoutView -->
+            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+        </div>
+    </div>
                     </div>
             </div>
          </div>
@@ -100,13 +103,9 @@
 <div class="medicineSection">
     <div class="manageMedicine">
         <h1>Manage Medicine</h1>
-        <div class="medicineBtn">
-            <a href="{% url 'addMedicine' %}"><button> New <span>|</span></button></a>
-
-            <a href=""><button> Update <span>|</span></button></a>
-
-            <a href=""><button> Delete</button></a>
-
+        <div class="editmedicineBtn">
+            <a href="{% url 'manageMedicine' %}"><button> Edit Medicine Record <span>|</span></button></a>
+            <a href="{% url 'addMedicine' %}"><button> Add New Medicine<span>|</span></button></a>
         </div>
         </div>
 </div>
@@ -125,7 +124,7 @@
           <th>Unit Volume</th>
           <th>Price Per Unit Volume</th>
           <th>Count</th>
-          <th>Created At</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -134,8 +133,8 @@
             <td>{{ medicine.medicine_name }}</td>
             <td>{{ medicine.description }}</td>
             <td>{{ medicine.unitVolume }}</td>
+            <td> {{ medicine.pricePerUnitVolume }}</td>
             <td>{{ medicine.count }}</td>
-            <td>{{ medicine.created_at }}</td>
             <td>
                         <a href="{% url 'edit_medicine' medicine.id %}">Edit</a>
                         <a href="{% url 'delete_medicine' medicine.id %}">Delete</a>
@@ -150,5 +149,17 @@
 
 
 </div>
+
+<!--  footer -->
+<footer>
+<div class="section">
+            <div class="footer">
+             <h4>Pharmacy Management System</h4>
+                <h5>Developed by: Syombua Jedidah</h5>
+                <p><br>&copy 2023 SYj Solutions - Pharmacy Management System &nbsp;</p>
+            </div>
+         </div>
+    </footer>
+
 </body>
 </html>

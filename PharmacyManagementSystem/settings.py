@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
-    'Pharmacy'
-
+    'Pharmacy',
+    'Customer'
 
 ]
 
@@ -136,7 +136,11 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 AUTH_USER_MODEL = 'accounts.User'
 LOGIN_REDIRECT_URL = 'pharmacist-home'
 LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = 'logout'
 

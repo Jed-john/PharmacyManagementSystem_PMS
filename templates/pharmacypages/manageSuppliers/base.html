@@ -29,9 +29,9 @@
         <ul>
 
                 <li>
-                    <a href="{% url 'dashboard' %}" class="active">
+                    <a href="{% url 'pharmacist-home' %}" class="active">
                         <span class="icon"><i class="fas fa-desktop" id="dashboard"></i></span>
-                        <span class="item">My Dashboard</span>
+                        <span class="item">Pharmacist Home</span>
                     </a>
                 </li>
                 <li>
@@ -41,15 +41,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <span class="icon"><i class="fa-solid fa-hand-holding-heart" id="clients"></i></span>
-                        <span class="item">Manage Clients</span>
+                    <a href="{% url 'online_store' %}">
+                        <span class="icon"><i class="fas fa-tachometer-alt" id="store"></i></span>
+                        <span class="item">Online Store</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-database" id="sales"></i></span>
-                        <span class="item">Manage Sales</span>
+                    <a href="{% url 'manageClients' %}">
+                        <span class="icon"><i class="fa-solid fa-hand-holding-heart" id="clients"></i></span>
+                        <span class="item">Manage Clients</span>
                     </a>
                 </li>
 
@@ -66,12 +66,6 @@
                     </a>
                 </li>
 
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-cog" id="settings"></i></span>
-                        <span class="item">Settings</span>
-                    </a>
-                </li>
             </ul>
         </div>
 

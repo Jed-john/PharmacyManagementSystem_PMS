@@ -1,7 +1,9 @@
+from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LogoutView
 from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView
 from django.contrib.auth import views as auth_views
 
@@ -12,7 +14,7 @@ from .models import User
 
 # Create your views here.
 def home(request):
-    return render(request, 'htmlpages/home.html')
+    return render(request, 'main/home.html')
 
 
 class PharmacistSignUpView(CreateView):
@@ -76,3 +78,17 @@ def pharmacist_home(request):
 @customer_required
 def customer_home(request):
     return render(request, 'accountspages/customer_home.html')
+
+
+class CustomLogoutView(LogoutView):
+    next_page = reverse_lazy('login')
+
+    def dispatch(self, request, *args, **kwargs):
+        response = super().dispatch(request, *args, **kwargs)
+        messages.success(request, "You have been successfully logged out.")
+        return response
+
+    def get_next_page(self):
+        next_page = super().get_next_page()
+        # You can modify the next_page URL here if needed
+        return next_page
