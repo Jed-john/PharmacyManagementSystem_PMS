@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pharmacist Home</title>
+
+    <link rel="stylesheet" href="{% static 'css/accountsStyles/pharmacist_homestyles.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        .my-client-details{
+            width: calc(100% - 255px);
+            margin-left: 255px;
+            position: relative;
+            top: 100px;
+        }
+        .pharmacist-details .details{
+            background-color: #87C4A7;
+            padding: 15px;
+        }
+        .pharmacist-details h2 span{
+            color: darkolivegreen;
+            font-weight: bolder;
+            font-size: 17px;
+        }
+        .my-client-details .client-card{
+            background-color: #D3D3D3 ;
+            padding: 10px;
+            width: 300px;
+            margin: 20px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="main_content">
+
+    <div class="home-menu">
+    <div class="home-sidebar">
+        <div class="profile">
+                <img src="https://images.pexels.com/photos/3938022/pexels-photo-3938022.jpeg?auto=compress&cs=tinysrgb&w=600" alt="profile_picture">
+                <h4>{{ user.get_username }}</h4>
+                <p>Pharmacist</p>
+            </div>
+
+        <ul>
+
+                <li>
+                    <a href="{% url 'pharmacist-home' %}" class="active">
+                        <span class="icon"><i class="fas fa-desktop" id="dashboard"></i></span>
+                        <span class="item">Pharmacist Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'manageMedicine' %}">
+                        <span class="icon"><i class="fa-solid fa-house-medical" id="medicine"></i></span>
+                        <span class="item">Manage Medicine</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'online_store' %}">
+                        <span class="icon"><i class="fas fa-tachometer-alt" id="store"></i></span>
+                        <span class="item">Online Store</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'manageClients' %}">
+                        <span class="icon"><i class="fa-solid fa-hand-holding-heart" id="clients"></i></span>
+                        <span class="item">Manage Clients</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'manageSuppliers' %}">
+                        <span class="icon"><i class="fas fa-user-shield" id="suppliers"></i></span>
+                        <span class="item">Manage Suppliers</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-chart-line" id="reports"></i></span>
+                        <span class="item">Reports</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="home-section">
+            <div class="top_navbar ">
+
+                <!-- menu bars to hide and show menu
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
+                -->
+
+             <h2>Pharmacist Dashboard</h2>
+                <h4>Date Today: {% now "N j, Y" %}. </h4>
+                <div class="bar_icons">
+                <span class="glyphicon glyphicon-search"><a href=""></a></span>
+                 <a href=""><span class="glyphicon glyphicon-bell"><a href=""></a></span></a>
+                <a href="">  <i class="fa fa-user-circle" aria-hidden="true"></i></a>
+                    </div>
+            </div>
+         </div>
+
+    </div>
+
+    {% block content %}
+    <div class="my-client-details">
+    <div class="pharmacist-details">
+        <p>Your Details Visible to Customers</p>
+        <div class="details">
+            <h2> <span>Name:</span> {{ pharmacist.first_name }} {{ pharmacist.last_name }} <span>Contact:</span> {{ pharmacist.telephone_number }}  <span>Pharmacy Name:</span> {{ pharmacist.pharmacy_name }} </h2>
+            <!-- Option to contact admin to reset pharmacist details with email link -->
+        <p>Are your details incorrect? <a href="mailto:johnjedidah0@gmail.com">Contact Admin</a> for assistance.</p>
+        </div>
+
+    </div>
+        {% for customer in my_customers %}
+            <div class="client-card">
+                <h2 style="color: darkolivegreen">CLIENT 1</h2>
+                <h4> <strong>Name: </strong> &nbsp;{{ customer.first_name }} {{ customer.last_name }}</h4>
+                <p> <strong>Age:</strong> &nbsp;{{ customer.medical_information.age }}</p>
+                <p> <strong>Gender:</strong> &nbsp;{{ customer.medical_information.gender }}</p>
+                <p> <strong>Height: </strong> &nbsp; {{ customer.medical_information.height }}</p>
+                <p> <strong>Weight: </strong> &nbsp;{{ customer.medical_information.weight }}</p>
+                <p> <strong>Allergies:</strong> &nbsp;{{ customer.medical_information.allergies }}</p>
+
+            </div>
+        {% endfor %}
+    </div>
+    {% endblock %}
+
+</div>
+<!-- pharmacist home footer -->
+<footer>
+<div class="section">
+            <div class="footer">
+             <h4>Pharmacy Management System</h4>
+                <h5>Developed by: Syombua Jedidah</h5>
+                <p><br>&copy 2023 SYj Solutions - Pharmacy Management System &nbsp;</p>
+            </div>
+         </div>
+    </footer>
+</body>
+</html>
+

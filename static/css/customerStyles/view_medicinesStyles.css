@@ -1,0 +1,45 @@
+.store-content{
+    width: calc(100% - 275px);
+    margin-left: 275px;
+    position: fixed;
+    margin-top: 65px; /* Adjust this value based on your design */
+    margin-top: 65px; /* Adjust as needed based on your top navigation height */
+    padding: 15px; /* Add some padding for spacing */
+
+    /* Set a maximum height and enable overflow-y for scrolling */
+    max-height: calc(100vh - 65px - 70px); /* Adjust as needed based on your top and bottom footer height */
+    overflow-y: auto; /* Enable vertical scrolling */
+
+}
+
+/* Style for the medicine cards */
+.medicine-card {
+    border: 1px solid #ddd; /* Add a border for separation */
+    padding: 10px; /* Add padding for spacing */
+    margin-bottom: 20px; /* Add margin between medicine cards */
+    background-color: white;
+}
+
+/* Optional: Add hover effect on medicine cards */
+.medicine-card:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow on hover */
+    background-color: #D3D3D3;
+}
+
+/* Optional: Style for the Buy button */
+.medicine-card button {
+    width: 100%; /* Make the button fill the container */
+}
+.medicine-card button:hover {
+    background-color: #91B150;
+}
+/* Optional: Add spacing between medicine name and image */
+.medicine-card h4 {
+    margin-bottom: 10px;
+}
+
+/* Optional: Style for the image */
+.medicine-card img {
+    max-width: 100%; /* Make sure the image doesn't exceed its container */
+}
+

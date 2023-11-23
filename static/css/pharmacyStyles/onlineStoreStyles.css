@@ -1,0 +1,117 @@
+
+.onlineStoreSection  {
+    width: calc(100% - 225px);
+    margin-left: 235px;
+    margin-top: 30px;
+}
+
+.onlineStoreSection .manageOnlineStore{
+    background: #6DC3D0;
+    margin-left: 10px;
+    height: 85px;
+    padding-left:15px;
+    display: flex;
+    justify-content:space-between;
+
+}
+.onlineStoreSection .manageOnlineStore .onlineStoreBtn .addMedicine_btn{
+    margin-right: 350px;
+    width: 250px;
+    padding: 10px;
+    margin-top: 15px;
+    background-color: #8BAB11;
+    border-style: none;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.onlineStoreSection .manageOnlineStore .onlineStoreBtn{
+    margin-right: 180px;
+    margin-top: 20px;
+    padding: 2px;
+    display: flex;
+    justify-content: space-between;
+
+}
+.onlineStoreSection .manageOnlineStore .onlineStoreBtn #newImage{
+    border-radius: 10px;
+    width: 300px;
+    background-color: darkgoldenrod;
+    border-style: none;
+    font-size: 17px;
+    color: #ffffff;
+}
+
+.onlineStoreSection .manageOnlineStore .onlineStoreBtn span{
+    color: black;
+    background-color: darkgoldenrod;
+    font-size: 40px;
+}
+
+/* registered medicine section with display and associate image option */
+.registeredMedicine .addedMedicine{
+    margin-left: 255px;
+    width: calc(100% - 265px);
+    background-color: #87C4A7;
+    margin-top: 30px;
+    padding: 10px;
+}
+.registeredMedicine .addedMedicine #RegisteredMedicineTable tr:hover{
+    color: white;
+    font-weight: bolder;
+    font-size: larger;
+    background: darkgoldenrod;
+    border-right: 2px solid rgb(5, 68, 104);
+    border-left: 2px solid rgb(5, 68, 104);
+}
+.registeredMedicine .addedMedicine #RegisteredMedicineTable tr a:hover{
+    color: white;
+}
+
+/* associate image to medicine styles*/
+.addMedicineImage {
+  margin-left: 285px;
+    width: 800px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.associateImageForm .associateImage{
+    width: 700px;
+    background-color: #87C4A7;
+    padding: 10px;
+    margin: 10px;
+}
+.associateImageForm .associateImage #associateImageBtn{
+    width: 90%;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #8BAB11;
+}
+.associateImageForm #backToList{
+    font-size: 15px;
+    margin: 30px;
+    color: blue;
+}
+.associateImageForm .associateImage label{
+    color: blue;
+    font-size: 18px;
+}
+
+ .file-input {
+      width: 90%;
+      display: block;
+      margin-bottom: 10px;
+ }
+
+/* part for choose file in associate image */
+.file-input::-webkit-file-upload-button {
+      width: 500px;
+      padding: 5px;
+    border-style: none;
+      border-radius: 5px;
+    }
+
+
+
+

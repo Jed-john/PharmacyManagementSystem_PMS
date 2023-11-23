@@ -1,0 +1,211 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Home</title>
+
+    <link rel="stylesheet" href="{% static 'css/accountsStyles/customer_homeStyles.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+    .registered_pharmacists {
+        width: calc(100% - 275px);
+        margin-left: 275px;
+        padding: 20px;
+        background-color: #D3D3D3;
+
+    }
+    .registered_pharmacists h2{
+        margin-top: 60px;
+    }
+    .pharmacist-list {
+        list-style: none;
+        padding: 0;
+        margin-top: 40px;
+    }
+
+    .pharmacist-item {
+        border: 1px solid #ccc;
+        margin-bottom: 15px;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .pharmacist-details {
+        flex: 1;
+    }
+
+    .pharmacist-details h4 {
+        margin-bottom: 5px;
+        color: #333;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+    .pharmacist-details span{
+        font-weight: bold;
+    }
+
+    .add-pharmacist-btn {
+        background-color: #6DC3D0;
+        color: #fff;
+        padding: 8px 15px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .add-pharmacist-btn:hover {
+        background-color: #91B150;
+        font-size: 15px;
+        color: black;
+        text-decoration: none;
+    }
+</style>
+</head>
+<body>
+<div class="main_content">
+
+    <div class="menu">
+    <div class="sidebar">
+        <div class="profile">
+                <img src="https://images.pexels.com/photos/3938022/pexels-photo-3938022.jpeg?auto=compress&cs=tinysrgb&w=600" alt="profile_picture">
+                <h4>{{ user.get_username }}</h4>
+                <p>Customer</p>
+            </div>
+
+        <ul>
+
+                <li>
+                    <a href="{% url 'customer_view_medicines' %}" class="active">
+                        <span class="icon"><i class="fas fa-desktop" id="dashboard"></i></span>
+                        <span class="item">Customer Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'medical_information' %}">
+                        <span class="icon"><i class="fa-solid fa-house-medical" id="medicine"></i></span>
+                        <span class="item">Medical Information</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'pharmacist_list' %}">
+                        <span class="icon"><i class="fa-solid fa-hand-holding-heart" id="clients"></i></span>
+                        <span class="item">Pharmacist</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'customer_view_medicines' %}">
+                        <span class="icon"><i class="fas fa-database" id="sales"></i></span>
+                        <span class="item">Drug Store</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-user-shield" id="suppliers"></i></span>
+                        <span class="item">Past Billing info</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-chart-line" id="reports"></i></span>
+                        <span class="item"> Medical Reports</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-cog" id="settings"></i></span>
+                        <span class="item">Settings/Board</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <div class="top_navbar ">
+
+                <!-- menu bars to hide and show menu
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
+                -->
+
+             <h2>Customer Home</h2>
+                <h4>Date Today: {% now "N j, Y" %}. </h4>
+                <div class="bar_icons">
+                <span class="glyphicon glyphicon-search"><a href=""></a></span>
+                 <a href=""><span class="glyphicon glyphicon-bell"><a href=""></a></span></a>
+                <a href="">  <i class="fa fa-user-circle" aria-hidden="true"></i></a>
+                    </div>
+            </div>
+         </div>
+
+    </div>
+<!-- customerPages/pharmacist_list.html -->
+
+{% block content %}
+    <div class="registered_pharmacists">
+        <h2>List of Registered Pharmacists</h2>
+        {% if chosen_pharmacist %}
+            <div class="pharmacist-item">
+                <div class="pharmacist-details">
+                    <h4>{{ chosen_pharmacist.first_name }} {{ chosen_pharmacist.last_name }}</h4>
+                    <p> <span>Email:</span> {{ chosen_pharmacist.user.email }}</p>
+                    <p> <span>Telephone:</span>  {{ chosen_pharmacist.telephone_number }}</p>
+                    <p> <span>Pharmacy Name:</span>  {{ chosen_pharmacist.pharmacy_name }}</p>
+                    <p> <span>Business Number:</span>  {{ chosen_pharmacist.business_number }}</p>
+                    <p> <span>Joined:</span>  {{ chosen_pharmacist.created_at }}</p>
+                </div>
+                <p>Pharmacist added as My Pharmacist</p>
+            </div>
+        {% else %}
+            <ul class="pharmacist-list">
+                {% for pharmacist in pharmacists %}
+                    <li class="pharmacist-item">
+                        <div class="pharmacist-details">
+                            <h4>{{ pharmacist.first_name }} {{ pharmacist.last_name }}</h4>
+                            <p> <span>Email:</span> {{ pharmacist.user.email }}</p>
+                            <p> <span>Telephone:</span>  {{ pharmacist.telephone_number }}</p>
+                            <p> <span>Pharmacy Name:</span>  {{ pharmacist.pharmacy_name }}</p>
+                            <p> <span>Business Number:</span>  {{ pharmacist.business_number }}</p>
+                            <p> <span>Joined:</span>  {{ pharmacist.created_at }}</p>
+                        </div>
+                        <form method="post" action="{% url 'add_my_pharmacist' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="pharmacist_id" value="{{ pharmacist.user.id }}">
+                            <button type="submit">Add as My Pharmacist</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+{% endblock %}
+
+
+</div>
+<footer>
+<div class="section">
+            <div class="footer">
+             <h2>{% block header_title %}Pharmacist Dashboard{% endblock %}</h2>
+                <h4>Date Today: {% now "N j, Y" %}. </h4>
+                <span class="glyphicon glyphicon-search"></span>
+                <span class="glyphicon glyphicon-bell"></span>
+                <i class="fa fa-user-circle" aria-hidden="true"></i>
+            </div>
+         </div>
+    </footer>
+</body>
+</html>
+
+

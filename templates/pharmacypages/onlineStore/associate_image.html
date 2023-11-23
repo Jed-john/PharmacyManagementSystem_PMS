@@ -1,0 +1,29 @@
+{% extends 'pharmacypages/onlineStore/base.html' %}
+
+{% block content %}
+  <div class="associateImageForm">
+    <h3>Add Image for Medicine: <strong>{{ medicine.medicine_name }}- {{ medicine.description }}</strong></h3>
+
+    <div class="associateImage">
+      <p><strong>Medicine Name:</strong>&nbsp; {{ medicine.medicine_name }}</p>
+      <p><strong>Description:</strong> &nbsp;{{ medicine.description }}</p>
+      <p><strong>Unit Volume:</strong> &nbsp;{{ medicine.unitVolume }}</p>
+      <p><strong>Expiry Date:</strong> &nbsp;{{ medicine.expiryDate }}</p>
+      <p> <strong>Price Per Unit Volume:</strong> &nbsp;{{ medicine.pricePerUnitVolume }}</p>
+      <p> <strong> Count: </strong>&nbsp;{{ medicine.count }}</p>
+      
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+          {{ form.image.label_tag}}
+          {{ form.image }}
+        </div>
+
+        <button type="submit" id="associateImageBtn">Associate Image</button>
+      </form>
+    </div>
+
+    <a href="{% url 'online_store' %}" id="backToList">Back to Medicine List</a>
+  </div>
+
+{% endblock %}

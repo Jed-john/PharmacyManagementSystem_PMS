@@ -1,0 +1,162 @@
+
+*{
+    list-style: none;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.main_content{
+    height: 100vh;
+}
+.main_content .sidebar {
+    background: #91B150;
+    position: fixed;
+    left: 2px;
+    width: 235px;
+    margin-top: 65px;
+    height: 86%;
+    padding: 10px 0;
+    transition: all 0.5s ease;
+}
+.menu .sidebar .profile{
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.menu .sidebar .profile img{
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.menu .sidebar .profile h4{
+    color: black;
+    margin: 10px 0 5px;
+
+}
+
+.menu .sidebar .profile p{
+    color: white;
+    font-size: 14px;
+}
+
+.menu .sidebar ul li a{
+    display: block;
+    padding: 8px;
+    border-bottom: 1px solid #10558d;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;
+
+}
+.menu .sidebar ul li a .icon{
+
+    width: 30px;
+    display: inline-block;
+}
+
+.menu .sidebar ul li a span{
+    font-size: 14px;
+}
+/* icon colors */
+.menu .sidebar ul li a .icon #dashboard{
+    color: #337AB7;
+}
+.menu .sidebar ul li a .icon #medicine{
+    color: coral;
+}
+.menu .sidebar ul li a .icon #clients{
+    color: #45a049;
+}
+.menu .sidebar ul li a .icon #suppliers{
+    color: #337AB7;
+}
+.menu .sidebar ul li a .icon #reports{
+    color: coral;
+}
+.menu .sidebar ul li a .icon #settings{
+    color: #45a049;
+}
+
+
+.menu .sidebar ul li a:hover {
+    color: rgb(5, 68, 104);
+    background: #D3D3D3;
+    border-right: 2px solid rgb(5, 68, 104);
+    font-weight: bolder;
+    font-size: 18px;
+}
+
+/*top bar*/
+.menu .section{
+    width: 100%;
+    position: fixed;
+}
+
+.menu .section .top_navbar{
+    background-color: #6DC3D0;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left:20px;
+    justify-content: space-between;
+
+}
+.menu .section .top_navbar h4{
+    color: black;
+}
+.menu .section .top_navbar .bar_icons a{
+    color: black;
+}
+.menu .section .top_navbar .bar_icons span{
+    padding-left: 30px;
+}
+.menu .section .top_navbar .bar_icons i{
+    font-size: 45px;
+    margin:15px;
+}
+/* Style for the footer */
+.footer {
+    background-color: grey;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    left: 2px;
+    width: 100%;
+}
+
+.footer h2 {
+    color: black;
+}
+
+.footer a {
+    color: black;
+}
+
+.footer i {
+    font-size: 45px;
+    margin: 15px;
+}
+
+/* Adjustments for the icon spacing */
+.footer .glyphicon-search {
+    padding-left: 30px;
+}
+
+.footer .glyphicon-bell {
+    padding-left: 30px;
+}
+
+/*styling for registered pharmacists that appear on customer clicking pharmacist,
