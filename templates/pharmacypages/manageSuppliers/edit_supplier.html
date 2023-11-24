@@ -1,0 +1,274 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pharmacist</title>
+
+    <link rel="stylesheet" href="{% static 'css/accountsStyles/pharmacist_homestyles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pharmacyStyles/manageSuppliersStyles.css' %}">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <style>
+        /* edit suppliers form */
+.editSuppliersForm {
+    margin-left: 265px;
+    width: calc(100% - 275px);
+    margin-bottom: 20px;
+    background-color: #D3D3D3;
+    padding-left: 30px;
+    padding-right: 10px;
+
+}
+.row {
+    display: flex;
+    justify-content: space-between;
+
+  }
+
+  .form-group {
+    flex: 1;
+    margin-right: 10px;
+  }
+
+  button {
+    margin-top: 3px;
+      width: 350px;
+      background-color: #91B150;
+      color: white;
+      padding: 2px;
+  }
+    </style>
+</head>
+<body>
+<div class="main_content">
+
+    <div class="menu">
+    <div class="sidebar">
+        <div class="profile">
+                <img src="https://images.pexels.com/photos/3938022/pexels-photo-3938022.jpeg?auto=compress&cs=tinysrgb&w=600" alt="profile_picture">
+                <h4>{{ user.get_username }}</h4>
+                <p>Pharmacist</p>
+            </div>
+
+        <ul>
+
+                <li>
+                    <a href="{% url 'pharmacist-home' %}" class="active">
+                        <span class="icon"><i class="fas fa-desktop" id="dashboard"></i></span>
+                        <span class="item">Pharmacist Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'manageMedicine' %}">
+                        <span class="icon"><i class="fas fa-user-friends" id="medicine"></i></span>
+                        <span class="item">Manage Medicine</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'online_store' %}">
+                        <span class="icon"><i class="fas fa-tachometer-alt" id="store"></i></span>
+                        <span class="item">Online Store</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'manageClients' %}">
+                        <span class="icon"><i class="fas fa-tachometer-alt" id="clients"></i></span>
+                        <span class="item">Manage Clients</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'manageSuppliers' %}">
+                        <span class="icon"><i class="fas fa-user-shield" id="suppliers"></i></span>
+                        <span class="item">Manage Suppliers</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'reports' %}">
+                        <span class="icon"><i class="fas fa-chart-line" id="reports"></i></span>
+                        <span class="item">Reports</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="section">
+            <div class="top_navbar ">
+
+                <!-- menu bars to hide and show menu
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
+                -->
+
+            <h4>{% block header_title %}Manage Suppliers{% endblock %}</h4>
+                <h4>Date Today: {% now "N j, Y" %}. </h4>
+                <div class="bar_icons">
+                <span class="glyphicon glyphicon-search"><a href=""></a></span>
+                 <a href=""><span class="glyphicon glyphicon-bell"><a href=""></a></span></a>
+                      <!-- Add a div for the user dropdown -->
+            <div class="dropdown">
+                <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                </a>
+            <div class="dropdown-menu" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a><!-- link Django LogoutView -->
+            </div>
+            </div>
+
+                    </div>
+            </div>
+         </div>
+
+    </div>
+
+<div class="suppliersSection">
+    <div class="manageSuppliers">
+        <h1>Manage Suppliers</h1>
+        <div class="suppliersBtn">
+            <a href="{% url 'add_supplier' %}"><button id="new"> New </button><span>|</span></a>
+
+            <a href="{% url 'manageSuppliers' %}"><button id="update"> Update </button><span>|</span></a>
+
+            <a href="{% url 'manageSuppliers' %}"><button id="delete"> Delete</button><span>|</span></a>
+
+        </div>
+        </div>
+</div>
+
+{% block content %}
+  <div class="editSuppliersForm">
+    <h2 style="color: darkolivegreen; text-decoration: underline">Edit Supplier Record</h2>
+    <form method="post" action="{% url 'edit_supplier' supplier.id %}">
+      {% csrf_token %}
+
+      <!-- Supplier Details -->
+      <div class="row">
+
+          <div class="form-group">
+            {{ form.supplier_legalName.label_tag }}
+            {{ form.supplier_legalName }}
+          </div>
+
+
+          <div class="form-group">
+            {{ form.supplier_TradeName.label_tag }}
+            {{ form.supplier_TradeName }}
+          </div>
+
+          <div class="form-group">
+            {{ form.supplier_GSTReGNo.label_tag }}
+            {{ form.supplier_GSTReGNo }}
+          </div>
+
+
+          <div class="form-group">
+            {{ form.category.label_tag }}
+            {{ form.category }}
+          </div>
+
+      </div>
+
+      <!-- Contact Details -->
+      <div class="row">
+
+          <div class="form-group">
+            {{ form.contact_name.label_tag }}
+            {{ form.contact_name }}
+          </div>
+
+
+          <div class="form-group">
+            {{ form.contact_PhoneNumber.label_tag }}
+            {{ form.contact_PhoneNumber }}
+          </div>
+
+
+          <div class="form-group">
+            {{ form.contact_email.label_tag }}
+            {{ form.contact_email }}
+          </div>
+
+          <div class="form-group">
+            {{ form.contact_address1.label_tag }}
+            {{ form.contact_address1 }}
+          </div>
+        </div>
+
+      <!-- Contract Details -->
+      <div class="row">
+         <div class="form-group">
+          {{ form.contract_startDate.label_tag }}
+          {{ form.contract_startDate }}
+        </div>
+        <div class="form-group">
+          {{ form.contract_EndDate.label_tag }}
+          {{ form.contract_EndDate }}
+        </div>
+          <div class="form-group">
+          {{ form.contract_Document.label_tag }}
+          {{ form.contract_Document  }}
+               {% if form.instance.contract_Document %}
+      <p>Previously chosen document: {{ form.instance.contract_Document.name }}</p>
+    {% endif %}
+        </div>
+      </div>
+
+      <div class="row">
+          <div class="form-group">
+          {{ form.settlement_currency.label_tag }}
+          {{ form.settlement_currency  }}
+          </div>
+
+        <div class="form-group">
+          {{ form.payment_method.label_tag }}
+          {{ form.payment_method  }}
+        </div>
+        <div class="form-group">
+          {{ form.status.label_tag }}
+          {{ form.status }}
+        </div>
+      </div>
+
+      <button type="submit" id="save">Save Changes</button> &nbsp;&nbsp;&nbsp;
+      <a href="{% url 'manageSuppliers' %}"><button type="button" id="discard">Discard Changes</button></a>
+    </form>
+
+  </div>
+{% endblock %}
+
+</div>
+<!-- manage suppliers footer -->
+<footer>
+<div class="section">
+            <div class="footer">
+             <h4>Pharmacy Management System</h4>
+                <h5>Developed by: Syombua Jedidah</h5>
+                <p><br>&copy 2023 SYj Solutions - Pharmacy Management System &nbsp;</p>
+            </div>
+         </div>
+    </footer>
+
+<script>
+  $(function() {
+    $(".datepicker").datepicker({
+      dateFormat: 'yy-mm-dd',
+      changeMonth: true,
+      changeYear: true,
+      yearRange: "-100:+10"  // Adjust the range as needed
+    });
+  });
+</script>
+</body>
+</html>
