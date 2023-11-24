@@ -85,7 +85,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{% url 'reports' %}">
                         <span class="icon"><i class="fas fa-chart-line" id="reports"></i></span>
                         <span class="item">Reports</span>
                     </a>
@@ -105,14 +105,13 @@
                  <span class="glyphicon glyphicon-bell"><a href=""></a></span>
                 <!-- Add a div for the user dropdown -->
             <div class="dropdown">
-        <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-user-circle" aria-hidden="true"></i>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="userDropdown">
-            <!-- Add a link for the Django LogoutView -->
-            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-        </div>
-    </div>
+                <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                </a>
+            <div class="dropdown-menu" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a><!-- link Django LogoutView -->
+            </div>
+            </div>
                     </div>
             </div>
          </div>
@@ -154,7 +153,7 @@
             <img src="{% static 'img/healthcarecenter.jpg' %}" alt="">
             <div class="carousel-caption">
                 <h3 style="color:blue">Supplier Management </h3>
-                <p style="font-weight: bolder">Description: Unleash the power of Supplier Management section to streamline your supplier relationships.
+                <p style="font-weight: bolder;background-color: #6c757d">Description: Unleash the power of Supplier Management section to streamline your supplier relationships.
                     <br> Effortlessly record and track supplier details, keeping a vigilant eye on their active status.
                     <br> Stay organized with comprehensive contract details for each supplier.
                     <br>Supplier Management Sentinel is your key to a well-organized and efficient pharmacy operation.</p>

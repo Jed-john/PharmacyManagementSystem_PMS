@@ -23,6 +23,7 @@ def customer_view_medicines(request):
     return render(request, 'customerPages/view_medicines.html', context)
 
 
+# display registered pharmacists to customer
 def pharmacist_list(request):
     pharmacists = Pharmacist.objects.all()
     customer = request.user.customer
@@ -30,6 +31,7 @@ def pharmacist_list(request):
     return render(request, 'customerPages/pharmacist_list.html', {'pharmacists': pharmacists, 'customer': customer, 'chosen_pharmacist': chosen_pharmacist})
 
 
+# customer add pharmacist
 def add_my_pharmacist(request):
     if request.method == "POST":
         pharmacist_id = request.POST.get("pharmacist_id")
@@ -37,7 +39,7 @@ def add_my_pharmacist(request):
         request.user.customer.my_pharmacist = pharmacist
         request.user.customer.save()
         return redirect('pharmacist_list')
-    return render(request, 'customerPages/mypharmacist.html')
+    return render(request, 'customerPages/pharmacist_list.html')
 
 
 @login_required

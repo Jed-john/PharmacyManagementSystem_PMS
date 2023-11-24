@@ -15,9 +15,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <style>
+        .addSuppliersBtn{
+            margin-top: 20px;
+            margin-left: 265px;
+            width: 600px;
+            margin-bottom: 30px;
+        }
+    </style>
 </head>
 <body>
 <div class="main_content">
@@ -64,7 +70,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{% url 'reports' %}">
                         <span class="icon"><i class="fas fa-chart-line" id="reports"></i></span>
                         <span class="item">Reports</span>
                     </a>
@@ -89,7 +95,15 @@
                 <div class="bar_icons">
                 <span class="glyphicon glyphicon-search"><a href=""></a></span>
                  <a href=""><span class="glyphicon glyphicon-bell"><a href=""></a></span></a>
-                <a href="">  <i class="fa fa-user-circle" aria-hidden="true"></i></a>
+                  <!-- Add a div for the user dropdown -->
+            <div class="dropdown">
+                <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                </a>
+            <div class="dropdown-menu" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a><!-- link Django LogoutView -->
+            </div>
+            </div>
                     </div>
             </div>
          </div>
@@ -102,97 +116,19 @@
         <div class="suppliersBtn">
             <a href="{% url 'add_supplier' %}"><button id="new"> New </button><span>|</span></a>
 
-            <a href=""><button id="update"> Update </button><span>|</span></a>
+            <a href="{% url 'manageSuppliers' %}"><button id="update"> Update </button><span>|</span></a>
 
-            <a href=""><button id="delete"> Delete</button><span>|</span></a>
+            <a href="{% url 'manageSuppliers' %}"><button id="delete"> Delete</button><span>|</span></a>
 
         </div>
         </div>
 </div>
 
 <!-- Add Suppliers button when clicked shows form-->
-
-{% block content %}
-<div class="addSupplierForm">
-    <form method="post" action="{% url 'add_supplier' %}" enctype="multipart/form-data">
-        {% csrf_token %}
-<!-- Supplier Details Form -->
-    <div class="form-section">
-        <h4>New Supplier Record</h4>
-    <div class="form-group-row">
-        <div class="form-group">
-            {{ form.supplier_legalName.label_tag }}
-            {{ form.supplier_legalName }}
-        </div>
-
-        <div class="form-group">
-            {{ form.supplier_TradeName.label_tag }}
-            {{ form.supplier_TradeName }}
-        </div>
-
-        <div class="form-group">
-            {{ form.supplier_GSTReGNo.label_tag }}
-            {{ form.supplier_GSTReGNo }}
-        </div>
-
-        <div class="form-group">
-            {{ form.category.label_tag }}
-            {{ form.category }}
-        </div>
-    </div>
-
-    <!-- Contact Details -->
-
-    <div class="form-group-row">
-        <div class="form-group">
-            {{ form.contact_name.label_tag }}
-            {{ form.contact_name }}
-        </div>
-
-        <div class="form-group">
-            {{ form.contact_email.label_tag }}
-            {{ form.contact_email }}
-        </div>
-
-        <div class="form-group">
-            {{ form.contact_PhoneNumber.label_tag }}
-            {{ form.contact_PhoneNumber }}
-        </div>
-
-        <div class="form-group">
-            {{ form.contact_address1.label_tag }}
-            {{ form.contact_address1 }}
-        </div>
-    </div>
-
-    <!-- Contract Details -->
-
-    <div class="form-group-row">
-        <div class="form-group">
-            {{ form.contract_startDate.label_tag }}
-            {{ form.contract_startDate }}
-        </div>
-
-        <div class="form-group">
-            {{ form.contract_EndDate.label_tag }}
-            {{ form.contract_EndDate }}
-        </div>
-        <div class="form-group">
-            {{ form.settlement_currency.label_tag }}
-            {{ form.settlement_currency }}
-        </div>
-        <div class="form-group">
-            {{ form.contract_Document.label_tag }}
-            {{ form.contract_Document }}
-        </div>
-    </div>
-
-    <button type="submit" class="addSuppliers-submit">Add Supplier</button>
-
+<div class="addSuppliersBtn">
+    <a href="{% url 'add_supplier' %}"><button type="submit" class="addSuppliers-submit" >Add New Supplier</button></a>
 </div>
-</form>
-</div>
-{% endblock %}
+
 
 
 <div class="registeredSuppliers">
@@ -225,8 +161,8 @@
                 <td>{{ supplier.contract_EndDate }}</td>
                 <td>{{ supplier.get_status_display }}</td>
                 <td>
-                  <a href="">Edit</a>
-                  <a href="">Delete</a>
+                  <a href="{% url 'edit_supplier' supplier.id%}">Edit</a>
+                  <a href="{% url 'delete_supplier' supplier.id%}">Delete</a>
                 </td>
               </tr>
         {% endfor %}

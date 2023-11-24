@@ -3,17 +3,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block header_title %}Pharmacist:Online Store{% endblock %}</title>
+    <title>{% block header_title %}Pharmacist:ManageSuppliers:Add{% endblock %}</title>
 
     <link rel="stylesheet" href="{% static 'css/accountsStyles/pharmacist_homestyles.css' %}">
-    <link rel="stylesheet" href="{% static 'css/pharmacyStyles/onlineStoreStyles.css' %}">
-
+    <link rel="stylesheet" href="{% static 'css/pharmacyStyles/manageSuppliersStyles.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
 <div class="main_content">
@@ -65,6 +67,7 @@
                         <span class="item">Reports</span>
                     </a>
                 </li>
+
             </ul>
         </div>
 
@@ -79,7 +82,7 @@
                 </div>
                 -->
 
-             <h4>Online Store: Add image for:  {{ medicine.medicine_name }}</h4>
+             <h4>Manage Suppliers: Add New Supplier</h4>
                 <h4>Date Today: {% now "N j, Y" %}. </h4>
                 <div class="bar_icons">
                 <span class="glyphicon glyphicon-search"><a href=""></a></span>
@@ -99,66 +102,142 @@
 
     </div>
 
-<div class="onlineStoreSection">
-    <div class="manageOnlineStore">
-        <h1>Online Store</h1>
-        <div class="onlineStoreBtn">
-            <a href="{% url 'online_store' %}"><button id="newImage">Choose Medicine to Associate Image <span>|</span></button></a>
+<div class="suppliersSection">
+    <div class="manageSuppliers">
+        <h1>Manage Suppliers</h1>
+        <div class="suppliersBtn">
+            <a href="{% url 'add_supplier' %}"><button id="new"> New </button><span>|</span></a>
 
+            <a href="{% url 'manageSuppliers' %}"><button id="update"> Update </button><span>|</span></a>
+
+            <a href="{% url 'manageSuppliers' %}"><button id="delete"> Delete</button><span>|</span></a>
 
         </div>
         </div>
 </div>
-<div class="addMedicineImage">
- {% block content %}
-  <div class="medicineDetails">
-    <h2>Registered Medicines:</h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Medicine Name</th>
-          <th>Description</th>
-          <th>Unit Volume</th>
-          <th>Price Per Unit Volume</th>
-          <th>Count</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for medicine in all_medicines %}
-          <tr>
-            <td>{{ medicine.medicine_name }}</td>
-            <td>{{ medicine.description }}</td>
-            <td>{{ medicine.unitVolume }}</td>
-            <td> {{ medicine.pricePerUnitVolume }}</td>
-            <td>{{ medicine.count }}</td>
-            <td>
-                        <a href="{% url 'edit_medicine' medicine.id %}">Edit</a>
-                        <a href="{% url 'delete_medicine' medicine.id %}">Delete</a>
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-{% endblock %}
-</div>
+
 <!-- new content from extended templates will be displayed here  -->
+{% block content %}
+<div class="addSupplierForm">
+    <form method="post" action="{% url 'add_supplier' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+<!-- Supplier Details Form -->
+    <div class="form-section">
+        <h4>New Supplier Record</h4>
+
+        {% if form.errors %}
+    <div class="alert alert-danger">
+        <strong>Error:</strong> Please correct the following errors.
+        <ul>
+            {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                    <li>{{ field }}: {{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+    <div class="form-group-row">
+        <div class="form-group">
+            {{ form.supplier_legalName.label_tag }}
+            {{ form.supplier_legalName }}
+        </div>
+
+        <div class="form-group">
+            {{ form.supplier_TradeName.label_tag }}
+            {{ form.supplier_TradeName }}
+        </div>
+
+        <div class="form-group">
+            {{ form.supplier_GSTReGNo.label_tag }}
+            {{ form.supplier_GSTReGNo }}
+        </div>
+
+        <div class="form-group">
+            {{ form.category.label_tag }}
+            {{ form.category }}
+        </div>
+    </div>
+
+    <!-- Contact Details -->
+
+    <div class="form-group-row">
+        <div class="form-group">
+            {{ form.contact_name.label_tag }}
+            {{ form.contact_name }}
+        </div>
+
+        <div class="form-group">
+            {{ form.contact_email.label_tag }}
+            {{ form.contact_email }}
+        </div>
+
+        <div class="form-group">
+            {{ form.contact_PhoneNumber.label_tag }}
+            {{ form.contact_PhoneNumber }}
+        </div>
+
+        <div class="form-group">
+            {{ form.contact_address1.label_tag }}
+            {{ form.contact_address1 }}
+        </div>
+    </div>
+
+    <!-- Contract Details -->
 
 
+    <div class="form-group-row">
+        <div class="form-group">
+            {{ form.contract_startDate.label_tag }}
+            {{ form.contract_startDate }}
+        </div>
+
+        <div class="form-group">
+            {{ form.contract_EndDate.label_tag }}
+            {{ form.contract_EndDate }}
+        </div>
+        <div class="form-group">
+            {{ form.contract_Document.label_tag }}
+            {{ form.contract_Document }}
+        </div>
+
+    </div>
+
+    <div class="form-group-row">
+        <div class="form-group">
+            {{ form.settlement_currency.label_tag }}
+            {{ form.settlement_currency }}
+        </div>
+        <div class="form-group">
+            {{ form.payment_method.label_tag }}
+            {{ form.payment_method }}
+        </div>
+        <div class="form-group">
+            {{ form.status.label_tag }}
+            {{ form.status }}
+        </div>
+    </div>
+
+    <button type="submit" class="addSuppliers-submit">Add Supplier</button>
+
+</div>
+</form>
+</div>
+{% endblock %}
 
 </div>
 
-<!-- pharmacist online store/associate image footer -->
-<footer>
-<div class="section">
-            <div class="footer">
-             <h4>Pharmacy Management System</h4>
-                <h5>Developed by: Syombua Jedidah</h5>
-                <p><br>&copy 2023 SYj Solutions - Pharmacy Management System &nbsp;</p>
-            </div>
-         </div>
-    </footer>
 
+
+<script>
+  $(function() {
+    $(".datepicker").datepicker({
+      dateFormat: 'yy-mm-dd',
+      changeMonth: true,
+      changeYear: true,
+      yearRange: "-100:+10"  // Adjust the range as needed
+    });
+  });
+</script>
 </body>
 </html>

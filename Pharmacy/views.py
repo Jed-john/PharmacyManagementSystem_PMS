@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from Pharmacy.forms import AddMedicineForm, AddSupplierForm, ImageAssociationForm
 from Pharmacy.models import AddMedicine, AddSupplier
 from accounts.decorators import pharmacist_required
-from accounts.models import Pharmacist
+from accounts.models import Pharmacist, Customer
 
 
 # Create your views here.
@@ -118,7 +118,7 @@ def add_supplier(request):
     # Get all suppliers for display
     all_suppliers = AddSupplier.objects.filter(pharmacist=pharmacist_instance)
 
-    return render(request, 'pharmacypages/manageSuppliers/manageSuppliers.html', {'form': form, 'all_suppliers': all_suppliers})
+    return render(request, 'pharmacypages/manageSuppliers/addSupplier.html', {'form': form, 'all_suppliers': all_suppliers})
 
 
 @login_required
@@ -130,6 +130,44 @@ def add_supplier_success(request):
     messages.success(request, 'Record Added Successfully')
 
     return render(request, 'pharmacypages/manageSuppliers/add_Supplier_success.html', {'all_suppliers': all_suppliers})
+
+
+@login_required
+@pharmacist_required
+def edit_supplier(request, supplier_id):
+    pharmacist_instance = Pharmacist.objects.get(user=request.user)
+    supplier = get_object_or_404(AddSupplier, id=supplier_id, pharmacist=pharmacist_instance)
+    print(f"Supplier Data: {supplier}")
+
+    if request.method == 'POST':
+        form = AddSupplierForm(request.POST, instance=supplier)
+        if form.is_valid():
+            form.save()
+            print("Supplier Record saved successfully!")  # for debugging
+            return redirect('manageSuppliers')
+        else:
+            print("Form is not valid!")  # for debugging
+            return render(request, 'pharmacypages/manageSuppliers/edit_supplier.html', {'form': form, 'supplier': supplier})
+    else:
+        form = AddSupplierForm(instance=supplier)
+
+    return render(request, 'pharmacypages/manageSuppliers/edit_supplier.html', {'form': form, 'supplier': supplier})
+
+
+@login_required
+@pharmacist_required
+def delete_supplier(request, supplier_id):
+    pharmacist_instance = Pharmacist.objects.get(user=request.user)
+    supplier = get_object_or_404(AddSupplier, id=supplier_id, pharmacist=pharmacist_instance)
+
+    if request.method == 'POST':
+        # Handle form submission to delete the medicine
+        supplier.delete()
+        messages.success(request, "Supplier Record deleted successfully.")
+        return redirect('manageSuppliers')
+
+    return render(request, 'pharmacypages/manageSuppliers/delete_supplier.html', {'supplier': supplier})
+
 
 
 # pharmacist online store views
@@ -162,3 +200,22 @@ def manage_clients(request):
     pharmacist = request.user.pharmacist
     my_customers = pharmacist.my_customers.all()
     return render(request, 'pharmacypages/manageClients/myClients.html', {'pharmacist': pharmacist, 'my_customers': my_customers})
+
+
+def reports_view(request):
+    # Calculate the required information
+    total_medicines = AddMedicine.objects.count()
+    total_online_store_medicines = AddMedicine.objects.filter(image__isnull=False).count()
+    total_suppliers = AddSupplier.objects.count()
+    total_clients = Customer.objects.count()
+    active_suppliers = AddSupplier.objects.filter(status='Active').count()
+
+    context = {
+        'total_medicines': total_medicines,
+        'total_online_store_medicines': total_online_store_medicines,
+        'total_suppliers': total_suppliers,
+        'total_clients': total_clients,
+        'active_suppliers': active_suppliers,
+    }
+
+    return render(request, 'pharmacypages/reports.html', context)

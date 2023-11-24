@@ -58,6 +58,8 @@
     margin-left: 285px;
     width: calc(100% - 285px);
     margin-bottom: 20px;
+    background-color: #D3D3D3;
+
 }
 
 .addSuppliersForm form {
@@ -124,19 +126,19 @@
     margin-left: 255px;
     width: calc(100% - 265px);
     background-color: #D3D3D3;
-    padding-top: 2px;
     padding-left: 5px;
-    padding-bottom: 5px
+    padding-bottom: 5px;
+    padding-top: 8px;
 }
 .registeredSuppliers .addedSuppliers #RegisteredSuppliersTable th{
-    font-weight: bolder;
-    font-size: 14px;
+    font-weight: bold;
     color: #10558d;
 }
 
 .registeredSuppliers .addedSuppliers #RegisteredSuppliersTable tr:hover{
     color: rgb(5, 68, 104);
-    background: #D3D3D3;
+    background: white;
     border-right: 2px solid rgb(5, 68, 104);
     border-left: 2px solid rgb(5, 68, 104);
 }
+

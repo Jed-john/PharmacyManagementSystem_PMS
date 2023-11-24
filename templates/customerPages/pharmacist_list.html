@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Customer Home</title>
+    <title>Customer View pharmacists</title>
 
     <link rel="stylesheet" href="{% static 'css/accountsStyles/customer_homeStyles.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -17,7 +17,7 @@
         width: calc(100% - 275px);
         margin-left: 275px;
         padding: 20px;
-        background-color: #D3D3D3;
+
 
     }
     .registered_pharmacists h2{
@@ -27,6 +27,7 @@
         list-style: none;
         padding: 0;
         margin-top: 40px;
+
     }
 
     .pharmacist-item {
@@ -36,6 +37,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        background-color: #D3D3D3;
     }
 
     .pharmacist-details {
@@ -53,7 +55,7 @@
     }
 
     .add-pharmacist-btn {
-        background-color: #6DC3D0;
+        background-color: blue;
         color: #fff;
         padding: 8px 15px;
         text-decoration: none;
@@ -166,7 +168,7 @@
                     <p> <span>Business Number:</span>  {{ chosen_pharmacist.business_number }}</p>
                     <p> <span>Joined:</span>  {{ chosen_pharmacist.created_at }}</p>
                 </div>
-                <p>Pharmacist added as My Pharmacist</p>
+                <p style="background-color: #8BAB11; padding: 3px">Pharmacist added as My Pharmacist</p>
             </div>
         {% else %}
             <ul class="pharmacist-list">
@@ -183,7 +185,7 @@
                         <form method="post" action="{% url 'add_my_pharmacist' %}">
                             {% csrf_token %}
                             <input type="hidden" name="pharmacist_id" value="{{ pharmacist.user.id }}">
-                            <button type="submit">Add as My Pharmacist</button>
+                            <button type="submit" class="add-pharmacist-btn">Add as My Pharmacist</button>
                         </form>
                     </li>
                 {% endfor %}
@@ -197,11 +199,9 @@
 <footer>
 <div class="section">
             <div class="footer">
-             <h2>{% block header_title %}Pharmacist Dashboard{% endblock %}</h2>
-                <h4>Date Today: {% now "N j, Y" %}. </h4>
-                <span class="glyphicon glyphicon-search"></span>
-                <span class="glyphicon glyphicon-bell"></span>
-                <i class="fa fa-user-circle" aria-hidden="true"></i>
+             <h4>Pharmacy Management System</h4>
+                <h5>Developed by: Syombua Jedidah</h5>
+                <p><br>&copy 2023 SYj Solutions - Pharmacy Management System &nbsp;</p>
             </div>
          </div>
     </footer>

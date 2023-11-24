@@ -233,7 +233,7 @@
     font-size: 16px;
 }
 .cancelButton {
-        background-color: #6c757d; /* Bootstrap's secondary color */
+        background-color: #6c757d;
         margin-left: 10px;
         width: 200px;
   }
