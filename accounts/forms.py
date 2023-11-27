@@ -8,16 +8,19 @@ User = get_user_model()
 
 
 class PharmacistSignUpForm(UserCreationForm):
-    email = forms.EmailField(widget=forms.EmailInput())
-    password1 = forms.CharField(widget=forms.PasswordInput())
-    password2 = forms.CharField(widget=forms.PasswordInput())
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'pharmacist-input'}))
 
-    first_name = forms.CharField(widget=forms.TextInput())
-    last_name = forms.CharField(widget=forms.TextInput())
-    telephone_number = forms.CharField(widget=forms.TextInput())
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'pharmacist-input'}))
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'pharmacist-input', 'placeholder': 'Password'}))
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'pharmacist-input',
+                                                                  'placeholder': 'Confirm Password'}))
 
-    pharmacy_name = forms.CharField(widget=forms.TextInput())
-    business_number = forms.CharField(widget=forms.TextInput())
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'pharmacist-input'}))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'pharmacist-input'}))
+    telephone_number = forms.CharField(widget=forms.TextInput(attrs={'class': 'pharmacist-input'}))
+
+    pharmacy_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'pharmName-input'}))
+    business_number = forms.CharField(widget=forms.TextInput(attrs={'class': 'pharmacist-input'}))
 
     class Meta(UserCreationForm.Meta):
         model = User
@@ -38,16 +41,16 @@ class PharmacistSignUpForm(UserCreationForm):
 
 
 class CustomerSignUpForm(UserCreationForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'custom-input'}))
 
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'custom-input', 'placeholder': 'Email'}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'custom-input'}))
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'custom-input', 'placeholder': 'Password'}))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'custom-input',
                                                                   'placeholder': 'Confirm Password'}))
 
-    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'custom-input', 'placeholder': 'First Name'}))
-    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'custom-input', 'placeholder': 'Last Name'}))
-    telephone_number = forms.CharField(widget=forms.TextInput(attrs={'class': 'custom-input',
-                                                                     'placeholder': 'Telephone Number'}))
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'custom-input'}))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'custom-input'}))
+    telephone_number = forms.CharField(widget=forms.TextInput(attrs={'class': 'custom-input'}))
 
     class Meta(UserCreationForm.Meta):
         model = User

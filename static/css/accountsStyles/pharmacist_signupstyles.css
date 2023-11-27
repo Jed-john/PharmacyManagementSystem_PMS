@@ -1,42 +1,65 @@
-/* pharmacist_signupstyles.css */
-
 body {
     font-family: Arial, sans-serif;
     background-color: #D3D3D3;
     margin: 0;
     padding: 0;
 }
-.pharmacist_signupform{
-    display: grid;
-    place-items: center;
+
+.top-nav {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+
+}
+
+.pharmacist_signupform {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 15px;
 }
 
 form {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
-    width: 400px;
+    width: 500px;
+    gap: 20px;
 }
-
 
 h1 {
     text-align: center;
 }
-label{
+
+label {
     margin: 5px;
     font-weight: bold;
-    font-size: 13px;
+    font-size: 12px;
 }
 
-.custom-input {
-    margin-left: 6px;
-    width: 90%;
-    padding: 10px;
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.form-group{
+    margin-right: 5px;
+}
+
+.pharmacist-input {
+    width: 230px;
+    padding: 5px;
+
+
+}
+.pharmName-input{
+    padding: 5px;
+    width: 74%;
+    margin-bottom: 15px;
 
 }
 
 /* Customize layout */
-
 
 input[type="submit"] {
     width: 100%;
@@ -59,4 +82,8 @@ p {
 
 a {
     color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
 }

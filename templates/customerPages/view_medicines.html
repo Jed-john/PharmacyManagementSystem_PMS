@@ -29,13 +29,13 @@
         <ul>
 
                 <li>
-                    <a href="{% url 'customer_view_medicines' %}" class="active">
+                    <a href="{% url 'customer-home' %}" class="active">
                         <span class="icon"><i class="fas fa-desktop" id="dashboard"></i></span>
                         <span class="item">Customer Home</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'medical_information' %}">
+                    <a href="{% url 'display_medical_information' %}">
                         <span class="icon"><i class="fa-solid fa-house-medical" id="medicine"></i></span>
                         <span class="item">Medical Information</span>
                     </a>
@@ -43,7 +43,7 @@
                 <li>
                     <a href="{% url 'pharmacist_list' %}">
                         <span class="icon"><i class="fa-solid fa-hand-holding-heart" id="clients"></i></span>
-                        <span class="item">Pharmacist</span>
+                        <span class="item">My Pharmacist</span>
                     </a>
                 </li>
                 <li>
@@ -53,25 +53,6 @@
                     </a>
                 </li>
 
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-user-shield" id="suppliers"></i></span>
-                        <span class="item">Past Billing info</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-chart-line" id="reports"></i></span>
-                        <span class="item"> Medical Reports</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-cog" id="settings"></i></span>
-                        <span class="item">Settings/Board</span>
-                    </a>
-                </li>
             </ul>
         </div>
 
@@ -91,8 +72,16 @@
                 <div class="bar_icons">
                 <span class="glyphicon glyphicon-search"><a href=""></a></span>
                  <a href=""><span class="glyphicon glyphicon-bell"><a href=""></a></span></a>
-                <a href="">  <i class="fa fa-user-circle" aria-hidden="true"></i></a>
-                    </div>
+                      <!-- div for the user dropdown with logout option -->
+                <div class="dropdown">
+                    <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                    </a>
+                <div class="dropdown-menu" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a><!-- link Django LogoutView -->
+                </div>
+                </div>
+                </div>
             </div>
          </div>
 
@@ -109,10 +98,16 @@
             {% for medicine in all_medicines %}
                 <div class="col-md-4">
                     <div class="medicine-card">
-                        <h4>{{ medicine.medicine_name }}</h4>
+                        <form action="{% url 'makepayment' %}" method="post">
+                        {% csrf_token %}
+                            <h4>{{ medicine.medicine_name }}</h4>
                         <img src="{{ medicine.image.url }}" alt="{{ medicine.medicine_name }}" style="width: 200px;" height="200px;">
-                        <p>Price: {{ medicine.pricePerUnitVolume }}</p>
-                        <button type="button" class="btn btn-primary">Buy</button>
+                        <p>Price:Ksh {{ medicine.pricePerUnitVolume }}</p>
+                            <input type="hidden" name="medicine_id" value="{{ medicine.id }}">
+                            <input type="number" name="quantity" placeholder="How many?"><br>
+                            <input type="number" name="phone_number" placeholder="Mpesa Phone Number"><br>
+                            <button type="submit" class="btn btn-primary">Buy</button>
+                    </form>
                     </div>
                 </div>
             {% endfor %}
@@ -124,11 +119,9 @@
 <footer>
 <div class="section">
             <div class="footer">
-             <h2>{% block header_title %}Pharmacist Dashboard{% endblock %}</h2>
-                <h4>Date Today: {% now "N j, Y" %}. </h4>
-                <span class="glyphicon glyphicon-search"></span>
-                <span class="glyphicon glyphicon-bell"></span>
-                <i class="fa fa-user-circle" aria-hidden="true"></i>
+             <h4>Pharmacy Management System</h4>
+                <h5>Developed by: Syombua Jedidah</h5>
+                <p><br>&copy 2023 SYj Solutions - Pharmacy Management System &nbsp;</p>
             </div>
          </div>
     </footer>

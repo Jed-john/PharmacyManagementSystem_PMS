@@ -85,13 +85,13 @@
         <ul>
 
                 <li>
-                    <a href="{% url 'customer_view_medicines' %}" class="active">
+                    <a href="{% url 'customer-home' %}" class="active">
                         <span class="icon"><i class="fas fa-desktop" id="dashboard"></i></span>
                         <span class="item">Customer Home</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'medical_information' %}">
+                    <a href="{% url 'display_medical_information' %}">
                         <span class="icon"><i class="fa-solid fa-house-medical" id="medicine"></i></span>
                         <span class="item">Medical Information</span>
                     </a>
@@ -99,7 +99,7 @@
                 <li>
                     <a href="{% url 'pharmacist_list' %}">
                         <span class="icon"><i class="fa-solid fa-hand-holding-heart" id="clients"></i></span>
-                        <span class="item">Pharmacist</span>
+                        <span class="item">My Pharmacist</span>
                     </a>
                 </li>
                 <li>
@@ -109,25 +109,6 @@
                     </a>
                 </li>
 
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-user-shield" id="suppliers"></i></span>
-                        <span class="item">Past Billing info</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-chart-line" id="reports"></i></span>
-                        <span class="item"> Medical Reports</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-cog" id="settings"></i></span>
-                        <span class="item">Settings/Board</span>
-                    </a>
-                </li>
             </ul>
         </div>
 
@@ -147,14 +128,21 @@
                 <div class="bar_icons">
                 <span class="glyphicon glyphicon-search"><a href=""></a></span>
                  <a href=""><span class="glyphicon glyphicon-bell"><a href=""></a></span></a>
-                <a href="">  <i class="fa fa-user-circle" aria-hidden="true"></i></a>
+                  <!-- div for the user dropdown with logout option -->
+                <div class="dropdown">
+                    <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                    </a>
+                <div class="dropdown-menu" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a><!-- link Django LogoutView -->
+                </div>
+                </div>
                     </div>
             </div>
          </div>
 
     </div>
 <!-- customerPages/pharmacist_list.html -->
-
 {% block content %}
     <div class="registered_pharmacists">
         <h2>List of Registered Pharmacists</h2>
@@ -168,7 +156,11 @@
                     <p> <span>Business Number:</span>  {{ chosen_pharmacist.business_number }}</p>
                     <p> <span>Joined:</span>  {{ chosen_pharmacist.created_at }}</p>
                 </div>
-                <p style="background-color: #8BAB11; padding: 3px">Pharmacist added as My Pharmacist</p>
+                <p style="padding: 3px">Pharmacist added as My Pharmacist</p> &nbsp;&nbsp;
+                <form method="post" action="{% url 'remove_my_pharmacist' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="add-pharmacist-btn">Reconsider?</button>
+                </form>
             </div>
         {% else %}
             <ul class="pharmacist-list">

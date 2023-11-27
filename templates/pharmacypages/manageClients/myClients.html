@@ -23,7 +23,10 @@
             background-color: #87C4A7;
             padding: 15px;
         }
-        .pharmacist-details h2 span{
+        .pharmacist-details h4{
+            color: white;
+        }
+        .pharmacist-details h4 span{
             color: darkolivegreen;
             font-weight: bolder;
             font-size: 17px;
@@ -127,18 +130,23 @@
     <div class="pharmacist-details">
         <p>Your Details Visible to Customers</p>
         <div class="details">
-            <h2> <span>Name:</span> {{ pharmacist.first_name }} {{ pharmacist.last_name }} <span>Contact:</span> {{ pharmacist.telephone_number }}  <span>Pharmacy Name:</span> {{ pharmacist.pharmacy_name }} </h2>
+            <h4> <span>Name:</span> {{ pharmacist.first_name }} {{ pharmacist.last_name }} <span>Contact:</span> {{ pharmacist.telephone_number }}  <span>Pharmacy Name:</span> {{ pharmacist.pharmacy_name }} </h4>
             <!-- Option to contact admin to reset pharmacist details with email link -->
         <p>Are your details incorrect? <a href="mailto:johnjedidah0@gmail.com">Contact Admin</a> for assistance.</p>
         </div>
 
     </div>
         {% for customer in my_customers %}
+            <h4 style="color: darkolivegreen">Client Details</h4>
             <div class="client-card">
-                <h2 style="color: darkolivegreen">CLIENT 1</h2>
-                <h4> <strong>Name: </strong> &nbsp;{{ customer.first_name }} {{ customer.last_name }}</h4>
+
+                <p style="color:saddlebrown ">Message Attached by ({{ customer.first_name }}): <span style="background-color: #007bff;padding: 5px;color: white">{{ customer.medical_information.write_message_to_pharmacist }}</span> </p>
+
+                <p><strong>Name:</strong>{{ customer.first_name }} {{ customer.last_name }}</p>
+                <h5> <strong>Contact:  {{ customer.telephone_number }}</strong> </h5>
                 <p> <strong>Age:</strong> &nbsp;{{ customer.medical_information.age }}</p>
                 <p> <strong>Gender:</strong> &nbsp;{{ customer.medical_information.gender }}</p>
+                <p> <strong>BMI: </strong> &nbsp; {{ customer.medical_information.bmi }}</p>
                 <p> <strong>Height: </strong> &nbsp; {{ customer.medical_information.height }}</p>
                 <p> <strong>Weight: </strong> &nbsp;{{ customer.medical_information.weight }}</p>
                 <p> <strong>Allergies:</strong> &nbsp;{{ customer.medical_information.allergies }}</p>

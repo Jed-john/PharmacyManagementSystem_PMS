@@ -5,31 +5,90 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/accountsStyles/loginstyles.css' %}">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('{% static 'img/introimg.jpg' %}');
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .top-bar {
+            background-color: #6DC3D0;
+            padding: 10px;
+            color: #fff;
+            display: flex;
+        }
+
+        h1 {
+            text-align: center;
+            margin-left: 300px;
+            color: #fff;
+            margin-top: 50px;
+        }
+
+        .loginform {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form input {
+            margin-bottom: 5px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 90%;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .signupLinks {
+            text-align: center;
+        }
+
+    </style>
     <title>Login</title>
 </head>
 <body>
-    <h1>Login</h1>
-<div class="loginform">
-    {% if messages %}
-  <ul class="messages">
-    {% for message in messages %}
-      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-  </ul>
-{% endif %}
-    <form action="{% url 'login' %}" method="POST">
-        <h3>Enter LogIn Credentials</h3>
-        {% csrf_token %}
-        {{ form.as_p }}
-        <p>Not yet registered?!</p>
-        <div class="signupLinks">
-    <a href="{% url 'pharmacist-signup' %}">Signup as Pharmacist</a> &nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="{% url 'customer-signup' %}">Signup as Customer</a> <br><br>
+    <div class="top-bar">
+        <p>SYj Pharmacy Management System</p>
+        <h1>Login</h1>
+    </div>
+    <div class="loginform">
+        {% if messages %}
+            <ul class="messages" style="color: saddlebrown">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <form action="{% url 'login' %}" method="POST">
+            <h3 style="text-align: center">Enter Log-In Credentials</h3>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p style="text-align: center">Not yet registered?!</p>
+            <div class="signupLinks">
+                <a href="{% url 'pharmacist-signup' %}">Signup as Pharmacist</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="{% url 'customer-signup' %}">Signup as Customer</a> <br><br>
             </div>
-        <input type="submit" value="Login">
-    </form>
-
-</div>
+            <input type="submit" value="Login">
+        </form>
+    </div>
 </body>
 </html>

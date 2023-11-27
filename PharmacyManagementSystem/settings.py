@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'Pharmacy',
-    'Customer'
+    'Customer',
+    'django_daraja'
 
 ]
 
@@ -143,4 +144,23 @@ AUTH_USER_MODEL = 'accounts.User'
 LOGIN_REDIRECT_URL = 'pharmacist-home'
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'logout'
+
+
+# being that it is not in production we are using sandbox for test
+MPESA_ENVIRONMENT = 'sandbox'
+
+# consumer key and consumer secret are generated for you when you create an app on daraja sandbox
+MPESA_CONSUMER_KEY = 'xOsPGcAQgSyrCF2Agpffi0bgAIYpceJQ'
+MPESA_CONSUMER_SECRET = 'ksJelFScwNiEA6rg'
+
+# To get the shortcode,passkey,username and security credential
+# go to daraja api you navigate to APIS then,payments, under mpesa payment,
+# on simulator select the app you created and click test credentials
+MPESA_SHORTCODE = '174379'
+MPESA_EXPRESS_SHORTCODE = '174379'
+MPESA_SHORTCODE_TYPE = 'paybill'
+MPESA_PASSKEY = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919'
+
+MPESA_INITIATOR_USERNAME = 'testapi'
+MPESA_INITIATOR_SECURITY_CREDENTIAL = 'Safaricom999!*!'
 

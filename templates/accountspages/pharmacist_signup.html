@@ -7,17 +7,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/accountsStyles/pharmacist_signupstyles.css' %}">
     <title>PMS/Pharmacist Signup</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('{% static 'img/introimg.jpg' %}');
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+        .topbar {
+            background-color: #6DC3D0;
+            padding: 10px;
+            color: #fff;
+            display: flex;
+        }
+
+        h1 {
+            text-align: center;
+            margin-left: 200px;
+            color: #fff;
+            margin-top: 50px;
+        }
+    </style>
 </head>
 <body>
+<div class="topbar">
+    <p>SYj Pharmacy Management System </p>
     <h1>Pharmacist Signup</h1>
+    </div>
     <div class="pharmacist_signupform">
     <form action="{% url 'pharmacist-signup' %}" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Signup">
-    </form>
-        </div>
-    <p>Already registered!</p>
-    <a href="{% url 'login' %}">Login Now</a><br>
+            {% csrf_token %}
+        <p style="color: saddlebrown; font-weight: bold">ENTER REQUIRED DETAILS</p>
+        <div class="row">
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label }}">Username:</label>
+                {{ form.username }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.email.id_for_label }}">Email:</label>
+                {{ form.email }}
+            </div>
+            </div>
+
+            <div class="row">
+            <div class="form-group">
+                <label for="{{ form.password1.id_for_label }}">Password:</label>
+                {{ form.password1 }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.password2.id_for_label }}">Confirm Password:</label>
+                {{ form.password2 }}
+            </div>
+            </div>
+
+            <div class="row">
+            <div class="form-group">
+                <label for="{{ form.first_name.id_for_label }}">First Name:</label>
+                {{ form.first_name }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.last_name.id_for_label }}">Last Name:</label>
+                {{ form.last_name }}
+            </div>
+            </div>
+
+            <div class="row">
+            <div class="form-group">
+                <label for="{{ form.telephone_number.id_for_label }}">Telephone Number:</label>
+                {{ form.telephone_number }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.business_number.id_for_label }}">Business Number:</label>
+                {{ form.business_number }}
+            </div>
+
+             </div>
+
+            <div class="form-group">
+                <label for="{{ form.pharmacy_name.id_for_label }}">Pharmacy Name:</label>
+                {{ form.pharmacy_name }}
+            </div>
+
+
+            <input type="submit" value="Signup"><br><br>
+
+    <p>Already registered!? <a href="{% url 'login' %}" >Login Now</a> </p>
+
+        </form>
+    </div>
 </body>
 </html>

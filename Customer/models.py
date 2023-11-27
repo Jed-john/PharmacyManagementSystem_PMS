@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import models
 
 from Pharmacy.models import AddMedicine
-from accounts.models import Customer, User
+from accounts.models import Customer, User, Pharmacist
 
 
 # Create your models here.
@@ -46,5 +46,8 @@ class MedicalInformation(models.Model):
     personal_diagnosis = models.CharField(max_length=20, choices=FAMILY_DIAGNOSIS_CHOICES, null=True, blank=True)
     family_diagnosis = models.CharField(max_length=20, choices=FAMILY_DIAGNOSIS_CHOICES, null=True, blank=True)
 
+    write_message_to_pharmacist = models.TextField(null=True, blank=True)
+
     def __str__(self):
         return f"Medical Information for {self.customer.first_name} {self.customer.last_name}"
+

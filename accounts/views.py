@@ -7,9 +7,11 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView
 from django.contrib.auth import views as auth_views
 
+from Customer.models import MedicalInformation
+from Pharmacy.models import AddMedicine
 from .decorators import pharmacist_required, customer_required
 from .forms import PharmacistSignUpForm, CustomerSignUpForm, LoginForm
-from .models import User
+from .models import User, Pharmacist
 
 
 # Create your views here.
@@ -77,7 +79,13 @@ def pharmacist_home(request):
 @login_required
 @customer_required
 def customer_home(request):
-    return render(request, 'accountspages/customer_home.html')
+    customer = request.user.customer
+    medical_info, created = MedicalInformation.objects.get_or_create(customer=customer)
+    all_pharmacists = Pharmacist.objects.all()
+    total_medicines_in_store = AddMedicine.objects.all()
+
+    return render(request, 'accountspages/customer_home.html',
+                  {'customer': customer, 'medical_info': medical_info, 'all_pharmacists': all_pharmacists, 'total_medicines_in_store': total_medicines_in_store})
 
 
 class CustomLogoutView(LogoutView):

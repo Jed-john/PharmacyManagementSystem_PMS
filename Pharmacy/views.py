@@ -169,9 +169,8 @@ def delete_supplier(request, supplier_id):
     return render(request, 'pharmacypages/manageSuppliers/delete_supplier.html', {'supplier': supplier})
 
 
-
 # pharmacist online store views
-# associate already registered medicine with an image and update stockcount
+# associate already registered medicine with an image
 @login_required
 @pharmacist_required
 def online_store(request):
@@ -196,6 +195,7 @@ def associate_image(request, medicine_id):
     return render(request, 'pharmacypages/onlineStore/associate_image.html', {'form': form, 'medicine': medicine})
 
 
+# see client details and message
 def manage_clients(request):
     pharmacist = request.user.pharmacist
     my_customers = pharmacist.my_customers.all()
@@ -203,6 +203,7 @@ def manage_clients(request):
 
 
 def reports_view(request):
+    pharmacist = request.user.pharmacist
     # Calculate the required information
     total_medicines = AddMedicine.objects.count()
     total_online_store_medicines = AddMedicine.objects.filter(image__isnull=False).count()
@@ -210,12 +211,17 @@ def reports_view(request):
     total_clients = Customer.objects.count()
     active_suppliers = AddSupplier.objects.filter(status='Active').count()
 
-    context = {
+    reports= {
         'total_medicines': total_medicines,
         'total_online_store_medicines': total_online_store_medicines,
         'total_suppliers': total_suppliers,
         'total_clients': total_clients,
         'active_suppliers': active_suppliers,
+    }
+
+    context = {
+        'pharmacist': pharmacist,
+        'reports': reports,
     }
 
     return render(request, 'pharmacypages/reports.html', context)

@@ -111,6 +111,7 @@
 .menu .section .top_navbar h4{
     color: black;
 }
+
 .menu .section .top_navbar .bar_icons a{
     color: black;
 }
@@ -121,6 +122,27 @@
     font-size: 45px;
     margin:15px;
 }
+/* styles for user icon that gives option to logout when hovered on */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    top: 40px;
+    display: none;
+    position: absolute;
+    background-color: #91B150;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 10px;
+
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
 /* Style for the footer */
 .footer {
     background-color: grey;

@@ -12,6 +12,51 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <style>
+        .summary-cards{
+            margin-left: 275px;
+            position: relative;
+            top: 80px;
+            display: flex;
+            flex-direction: row;
+            padding: 4px;
+        }
+        .column {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .card {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-right: 20px;
+        }
+
+        .tall-card {
+            height: 450px;
+            background-color: #6DC3D0;
+            width: 300px;
+        }
+        .tall-card table,
+        td{
+            border-style: dashed;
+            border-color: black;
+        }
+
+
+        .small-card {
+            height: 200px;
+            margin-bottom: 15px;
+            width: 280px;
+        }
+
+        .large-card {
+            margin-top: 70px;
+            height: 250px;
+            width: 300px;
+            background-color: #337AB7;
+        }
+    </style>
 </head>
 <body>
 <div class="main_content">
@@ -27,13 +72,13 @@
         <ul>
 
                 <li>
-                    <a href="{% url 'customer_view_medicines' %}" class="active">
+                    <a href="{% url 'customer-home' %}" class="active">
                         <span class="icon"><i class="fas fa-desktop" id="dashboard"></i></span>
                         <span class="item">Customer Home</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'medical_information' %}">
+                    <a href="{% url 'display_medical_information' %}">
                         <span class="icon"><i class="fa-solid fa-house-medical" id="medicine"></i></span>
                         <span class="item">Medical Information</span>
                     </a>
@@ -41,33 +86,13 @@
                 <li>
                     <a href="{% url 'pharmacist_list' %}">
                         <span class="icon"><i class="fa-solid fa-hand-holding-heart" id="clients"></i></span>
-                        <span class="item">Pharmacist</span>
+                        <span class="item">My Pharmacist</span>
                     </a>
                 </li>
                 <li>
                     <a href="{% url 'customer_view_medicines' %}">
                         <span class="icon"><i class="fas fa-database" id="sales"></i></span>
                         <span class="item">Drug Store</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-user-shield" id="suppliers"></i></span>
-                        <span class="item">Past Billing info</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-chart-line" id="reports"></i></span>
-                        <span class="item"> Medical Reports</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-cog" id="settings"></i></span>
-                        <span class="item">Settings/Board</span>
                     </a>
                 </li>
             </ul>
@@ -89,12 +114,85 @@
                 <div class="bar_icons">
                 <span class="glyphicon glyphicon-search"><a href=""></a></span>
                  <a href=""><span class="glyphicon glyphicon-bell"><a href=""></a></span></a>
-                <a href="">  <i class="fa fa-user-circle" aria-hidden="true"></i></a>
+                  <!-- div for the user dropdown with logout option -->
+            <div class="dropdown">
+                <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                </a>
+            <div class="dropdown-menu" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a><!-- link Django LogoutView -->
+            </div>
+            </div>
                     </div>
             </div>
          </div>
-
     </div>
+{% block content %}
+
+<div class="summary-cards">
+     <div class="card tall-card">
+    <h3 style="text-decoration: underline">Medical Information</h3>
+
+    <!-- Display Customer Name and Age -->
+    <h4 style="color:saddlebrown">{{ customer.first_name }} {{ customer.last_name }}<br> {{ customer.medical_information.age }} years old</h4>
+
+    <table class="table table-striped">
+        <tr>
+            <td>Height</td>
+            <td>{{ customer.medical_information.height }}</td>
+        </tr>
+        <tr>
+            <td>Weight</td>
+            <td>{{ customer.medical_information.weight }}</td>
+        </tr>
+        <tr>
+            <td>BMI</td>
+            <td>{{ medical_info.bmi }}</td>
+        </tr>
+        <tr>
+            <td>Personal Diagnosis</td>
+            <td>{{ medical_info.personal_diagnosis }}</td>
+        </tr>
+    </table>
+
+    <!-- Display Family Diagnosis and Allergies -->
+
+        <div >
+            <strong>Family Diagnosis:</strong> {{medical_info.family_diagnosis }}
+        </div>
+         <br>
+        <div>
+            <strong>Allergies:</strong> {{ medical_info.allergies }}
+        </div>
+
+</div>
+    <!--my pharmacist card -->
+    <div class="column">
+    <div class="card small-card" style="background-color: saddlebrown">
+
+        <h3 style="text-decoration: underline">My Pharmacist</h3>
+        <p style="color: white"> <strong>Pharmacist:</strong> {{ customer.my_pharmacist.first_name }} {{ customer.my_pharmacist.last_name }}</p>
+        <p style="color: white;">  <strong>Contact:</strong> {{ customer.my_pharmacist.telephone_number }}</p>
+        <a href="{% url 'pharmacist_list' %}" style="color:black">View more details</a>
+    </div>
+
+        <!--all pharmacist card -->
+    <div class="card small-card" style="background-color: #45a049">
+        <!-- Total Pharmacists Summary -->
+        <h3 style="font-size: 50px">{{ all_pharmacists|length }}</h3>
+        <h4>Total Pharmacists</h4>
+    </div>
+    </div>
+
+    <div class="card large-card">
+        <!-- Another Card Below -->
+            <h3 style="font-size: 50px">{{ total_medicines_in_store|length }}</h3>
+            <h3>Available Medicine</h3>
+        <a href="{% url 'customer_view_medicines' %}" style="color: white">Proceed to store</a>
+    </div>
+</div>
+{% endblock %}
+
 
 </div>
 <footer>

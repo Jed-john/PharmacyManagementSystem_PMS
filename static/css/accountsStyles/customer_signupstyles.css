@@ -9,15 +9,19 @@ body {
 .customer_signupform{
     display: grid;
     place-items: center;
-}
+    margin-top: 20px;
 
+}
+#username{
+    padding: 10px;
+    height: 100px;
+}
 form {
     background-color: #fff;
-    padding: 20px;
+    padding: 15px;
     border-radius: 8px;
-    width: 400px;
+    width: 500px;
 }
-
 
 h1 {
     text-align: center;
@@ -31,10 +35,12 @@ label{
 .custom-input {
     margin-left: 6px;
     width: 90%;
-    padding: 10px;
+    padding: 5px;
 
 }
-
+.form-group {
+    margin: 3px;
+}
 /* Customize layout */
 
 

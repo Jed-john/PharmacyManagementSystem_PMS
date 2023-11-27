@@ -16,14 +16,62 @@
 
     <style>
     .customer-medical-details {
-        width: calc(100% - 275px);
-        margin-left: 275px;
+        width: calc(100% - 265px);
+        margin-left: 265px;
         padding: 20px;
 
     }
-    .customer-medical-details h2{
-        margin-top: 60px;
+    .customer-medical-details h3{
+        margin-top: 50px;
+        background-color: #91B150;
+        padding:10px;
     }
+
+    .form-row {
+        margin-left: 50px;
+        margin-right: 30px;
+        display: flex;
+        justify-content: space-between;
+
+}
+
+    .form-group {
+         flex: 1;
+         margin-right: 10px;
+    }
+
+    .allergies-group textarea {
+        height: 40px;
+        width: 100%;
+    }
+    .form-group textarea#id_write_message_to_pharmacist {
+        width: 100%;
+        height: 60px;
+    }
+    .form-group label {
+        display: block;
+    }
+
+.form-group input, .form-group select {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #6c757d;
+    margin-left: 50px;
+    width: 60%;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
 
 </style>
 </head>
@@ -41,13 +89,13 @@
         <ul>
 
                 <li>
-                    <a href="{% url 'customer_view_medicines' %}" class="active">
+                    <a href="{% url 'customer-home' %}" class="active">
                         <span class="icon"><i class="fas fa-desktop" id="dashboard"></i></span>
                         <span class="item">Customer Home</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'medical_information' %}">
+                    <a href="{% url 'display_medical_information' %}">
                         <span class="icon"><i class="fa-solid fa-house-medical" id="medicine"></i></span>
                         <span class="item">Medical Information</span>
                     </a>
@@ -55,7 +103,7 @@
                 <li>
                     <a href="{% url 'pharmacist_list' %}">
                         <span class="icon"><i class="fa-solid fa-hand-holding-heart" id="clients"></i></span>
-                        <span class="item">Pharmacist</span>
+                        <span class="item">My Pharmacist</span>
                     </a>
                 </li>
                 <li>
@@ -65,24 +113,6 @@
                     </a>
                 </li>
 
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-user-shield" id="suppliers"></i></span>
-                        <span class="item">Past Billing info</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-chart-line" id="reports"></i></span>
-                        <span class="item"> Medical Reports</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-cog" id="settings"></i></span>
-                        <span class="item">Settings/Board</span>
-                    </a>
                 </li>
             </ul>
         </div>
@@ -103,65 +133,80 @@
                 <div class="bar_icons">
                 <span class="glyphicon glyphicon-search"><a href=""></a></span>
                  <a href=""><span class="glyphicon glyphicon-bell"><a href=""></a></span></a>
-                <a href="">  <i class="fa fa-user-circle" aria-hidden="true"></i></a>
+                  <!-- div for the user dropdown with logout option -->
+            <div class="dropdown">
+                <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                </a>
+            <div class="dropdown-menu" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a><!-- link Django LogoutView -->
+            </div>
+            </div>
                     </div>
             </div>
          </div>
 
     </div>
-<!-- customerPages/pharmacist_list.html -->
+<!-- customer medical info -->
 {% block content %}
-    <div class="customer-medical-details">
-        <h2>{{ customer.first_name }} {{ customer.last_name }} - Medical Information</h2>
-        <!-- Display customer details here -->
+  <div class="customer-medical-details">
 
-        <h3>Enter Medical Information</h3>
-        <form method="post" action="{% url 'medical_information' %}">
-            {% csrf_token %}
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    {{ form.height.label_tag }}
-                    {{ form.height }}
-                </div>
-                <div class="form-group col-md-6">
-                    {{ form.weight.label_tag }}
-                    {{ form.weight }}
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    {{ form.age.label_tag }}
-                    {{ form.age }}
-                </div>
-                <div class="form-group col-md-6">
-                    {{ form.gender.label_tag }}
-                    {{ form.gender }}
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    {{ form.bmi.label_tag }}
-                    {{ form.bmi }}
-                </div>
-                <div class="form-group col-md-6">
-                    {{ form.allergies.label_tag }}
-                    {{ form.allergies }}
-                </div>
-            </div>
-
+    <h3>{{ customer.first_name }} {{ customer.last_name }} - Medical Information</h3>
+      <p>Note:This information is visible to your pharmacist, and you can edit it at any time.</p>
+    <form method="post" action="{% url 'display_medical_information' %}">
+      {% csrf_token %}
+        <div class="form-row">
             <div class="form-group">
-                {{ form.personal_diagnosis.label_tag }}
-                {{ form.personal_diagnosis }}
-            </div>
+          <label for="id_gender">Gender</label>
+          {{ form.gender }}
+        </div>
             <div class="form-group">
-                {{ form.family_diagnosis.label_tag }}
-                {{ form.family_diagnosis }}
-            </div>
-            <button type="submit">Save</button>
-        </form>
-    </div>
+          <label for="id_age">Age</label>
+          {{ form.age }}
+        </div>
+        </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="id_height">Height</label>
+          {{ form.height }}
+        </div>
+
+        <div class="form-group">
+          <label for="id_weight">Weight</label>
+          {{ form.weight }}
+        </div>
+        <div class="form-group">
+          <label for="id_bmi">BMI</label>
+          {{ form.bmi }}
+        </div>
+      </div>
+
+      <div class="form-row">
+          <div class="form-group allergies-group">
+          <label for="id_allergies">Allergies</label>
+          {{ form.allergies }}
+        </div>
+        <div class="form-group">
+          <label for="id_personal_diagnosis">Personal Diagnosis</label>
+          {{ form.personal_diagnosis }}
+        </div>
+
+        <div class="form-group">
+          <label for="id_family_diagnosis">Family Diagnosis</label>
+          {{ form.family_diagnosis }}
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+        <label for="id_write_message_to_pharmacist">Write Message to Your Pharmacist</label>
+        {{ form.write_message_to_pharmacist }}
+        </div>
+      </div>
+      <button type="submit">Save</button>
+    </form>
+  </div>
 {% endblock %}
 
 
@@ -170,11 +215,9 @@
 <footer>
 <div class="section">
             <div class="footer">
-             <h2>{% block header_title %}Pharmacist Dashboard{% endblock %}</h2>
-                <h4>Date Today: {% now "N j, Y" %}. </h4>
-                <span class="glyphicon glyphicon-search"></span>
-                <span class="glyphicon glyphicon-bell"></span>
-                <i class="fa fa-user-circle" aria-hidden="true"></i>
+             <h4>Pharmacy Management System</h4>
+                <h5>Developed by: Syombua Jedidah</h5>
+                <p><br>&copy 2023 SYj Solutions - Pharmacy Management System &nbsp;</p>
             </div>
          </div>
     </footer>
